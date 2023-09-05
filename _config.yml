@@ -81,9 +81,9 @@ analytics:
 # Site Author
 author:
   name             : "Qihang Li"
-  avatar           : "qihang.jpg"
+  avatar           : "images/qihang.jpg"
   bio              : "OK, computer. I want full manual control now."
-  location         : "images/qihang.jpg"
+  # location         : "NY, US"
   employer         :
   # pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   # googlescholar    : "http://yourfullgooglescholarurl.com"
