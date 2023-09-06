@@ -12,7 +12,8 @@ Welcome! I am Qihang Li, and I am currently serving as a Research Intern at the 
 
 Research Interests
 -----
-My current research interest lies in **robot motion planning and learning**. For the long-term, I aim to improve robots' ability to generalize, so they can handle a broad range of tasks commonly encountered in human life. Concurrently, I am committed to being a full-stack learner in robotics, covering a comprehensive range of skills and knowledge in the field.
+My current research interest is in **robot motion planning and learning**. I am particularly captivated by the challenges posed by motion planning in complex environments and high-dimensional state spaces. My long-term goal is to enhance robots' generalization capabilities, allowing them to effectively navigate and perform tasks in diverse human-centric settings.
 
-Before joining the SAIR lab, I conducted robotics research at the [Laboratory of Biomechanical and Image Guided Surgical Systems (BIGSS)](https://bigss.lcsr.jhu.edu/). My work there focused on continuum manipulators, specifically in perception and planning, with the objective of reducing surgical injuries in orthopedic procedures. I continue to maintain a strong interest and respect for topics related to medical robotics.
+Alongside my research, I am committed to being a full-stack learner in robotics. I believe it is benificial because the field is highly coupled; a broad skill set enables me to tackle complex challenges more effectively.
 
+Before joining the SAIR lab, I conducted robotics research at the [Laboratory of Biomechanical and Image Guided Surgical Systems (BIGSS)](https://bigss.lcsr.jhu.edu/). My work there focused on **continuum manipulators**, specifically in perception and planning, with the objective of reducing surgical injuries in orthopedic procedures. I continue to maintain a strong interest and respect for topics related to medical robotics.
