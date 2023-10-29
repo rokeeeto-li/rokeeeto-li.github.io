@@ -12,7 +12,7 @@ Welcome! I am Qihang Li, and I am currently serving as a Research Intern at the 
 
 Research Interests
 -----
-My current research interest is in **robot motion planning and learning**. I am particularly captivated by the challenges posed by motion planning in complex environments and high-dimensional state spaces. My long-term goal is to enhance robots' generalization capabilities, allowing them to effectively navigate and perform tasks in diverse human-centric settings.
+My current research is focused on **robot planning and learning** to imbue robots with higher and more generalized intelligence. I aim to embed a deeper understanding of physical laws into robotic systems, thereby enhancing their predictive capabilities.
 
 Alongside my research, I am committed to being a full-stack learner in robotics. I believe it is benificial because the field is highly coupled; a broad skill set enables me to tackle complex challenges more effectively.
 
