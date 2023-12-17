@@ -11,11 +11,11 @@ redirect_from:
 
 Education
 ======
-**MSE in Robotics**
+**MSE in Robotics**<br>
 Johns Hopkins University, US, Aug 2021 - May 2023
 
-**BEng in Mechatronics and Robotics System**
-University of Liverpool, UK, Aug 2019 - May 2021
+**BEng in Mechatronics and Robotics System**<br>
+University of Liverpool, UK, Aug 2019 - May 2021<br>
 Xi'an Jiaotong-Liverpool University, China, Aug 2017 - May 2019
 
 Research experience
@@ -53,12 +53,9 @@ Publications
 
 Teaching
 ======
-* 2022 Fall, EN530.641 Statistical Learning for Engineers, Johns Hopkins University.
-<!-- Teaching
-======
   <ul>{% for post in site.teaching %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul> -->
+  {% endfor %}</ul>
   
 <!-- Service and leadership
 ======
