@@ -27,7 +27,7 @@ Research experience
 
 * Sept 2022 - July 2023: Research Assistant
   * Laboratory of Biomechanical and Image Guided Surgical Systems
-  * Johns Hopkins Univversity
+  * Johns Hopkins University
   * Advisor: Mehran Armand, Joshua Liu
   
 <!-- Skills
