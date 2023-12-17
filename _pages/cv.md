@@ -21,12 +21,12 @@ Xi'an Jiaotong-Liverpool University, China, Aug 2017 - May 2019
 Research experience
 ======
 * Aug 2023 - Present: Research Associate
-  * Spatial AI & Robotics Lab
+  * [Spatial AI & Robotics Lab](https://sairlab.org/)
   * University at Buffalo
   * Advisor: Chen Wang, Junyi Geng
 
 * Sept 2022 - July 2023: Research Assistant
-  * Laboratory of Biomechanical and Image Guided Surgical Systems
+  * [Laboratory of Biomechanical and Image Guided Surgical Systems](https://bigss.lcsr.jhu.edu/)
   * Johns Hopkins University
   * Advisor: Mehran Armand, Joshua Liu
   
