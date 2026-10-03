@@ -7,13 +7,13 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Home"
+title                    : "Qihang Li"
 title_separator          : "-"
-name                     : &name "Qihang"
-description              : &description "personal description"
+name                     : &name "Qihang Li"
+description              : &description "Qihang Li, PhD student in Computer Science at NC State University. Robot collaboration, perception, and planning."
 url                      : https://rokeeeto-li.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "academicpages/academicpages.github.io"
+repository               : "rokeeeto-li/rokeeeto-li.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -84,10 +84,10 @@ author:
   avatar           : "qihang.jpg"
   bio              : "OK, robot. I want full automatic control now."
   # location         : "NY, US"
-  employer         :
+  employer         : "North Carolina State University"
   # pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=Yw9_kMQAAAAJ&hl=en"
-  email            : "Qihang_Li@foxmail.com"
+  email            : "qli39@ncsu.edu"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -96,7 +96,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "academicpages"
+  github           : "rokeeeto-li"
   google_plus      :
   keybase          :
   instagram        :
@@ -179,7 +179,7 @@ collections:
     output: true
     permalink: /:collection/:path/
   publications:
-    output: true
+    output: false
     permalink: /:collection/:path/
   portfolio:
     output: true

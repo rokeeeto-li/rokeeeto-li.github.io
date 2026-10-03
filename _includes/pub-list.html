@@ -1,0 +1,20 @@
+{% comment %}
+  Renders the publication list. Usage: {% include pub-list.html kind="preprint" %}, kind="paper", or kind="selected" (unnumbered; entries with a `selected: N` front-matter field, ordered by N).
+  Entries come from _publications/*.md (front matter: title, date, venue, pubtype, authors, website, paperurl, award, note).
+{% endcomment %}
+{% assign pubs = site.publications | sort: "date" | reverse %}
+{% if include.kind == "selected" %}
+  {% assign pubs = site.publications | where_exp: "p", "p.selected" | sort: "selected" %}
+  {% assign prefix = "" %}
+{% elsif include.kind == "preprint" %}
+  {% assign pubs = pubs | where: "pubtype", "preprint" %}
+  {% assign prefix = "P" %}
+{% else %}
+  {% assign pubs = pubs | where_exp: "p", "p.pubtype != 'preprint'" %}
+  {% assign prefix = "" %}
+{% endif %}
+{% assign total = pubs | size %}
+{% for p in pubs %}
+<p>{% unless include.kind == "selected" %}[{{ prefix }}{{ total | minus: forloop.index0 }}]&nbsp;{% endunless %}{% if p.authors %}{{ p.authors | replace: "Qihang Li", "<b>Qihang Li</b>" }}. {% endif %}<b>{{ p.title }}</b>. {% if p.pubtype == "preprint" %}<i>Preprint</i>.{% else %}<i>{{ p.venue }}</i>, {{ p.date | date: "%Y" }}.{% endif %}{% if p.award %} <b>{{ p.award }}.</b>{% endif %}{% if p.note %} {{ p.note }}{% endif %}
+{% if p.website %}<a href="{{ p.website }}">[website]</a>{% endif %}{% if p.paperurl %} <a href="{{ p.paperurl }}">[paper]</a>{% endif %}</p>
+{% endfor %}
