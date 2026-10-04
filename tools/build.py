@@ -2,7 +2,8 @@
 Run from the site root:  python3 tools/build.py
 To add a paper: append an entry to pubs.json (same fields as the others), optionally drop
 a thumbnail as assets/<slug>/thumb.jpg (or .png/.gif/.webp; put any other material for that
-project in the same folder), then rerun. Optional: assets/<slug>/full.mp4 (or full.gif/png) is shown when the thumbnail is clicked. Optional fields: website, paperurl, github."""
+project in the same folder), then rerun. Optional: assets/<slug>/full.mp4 (or full.gif/png) is shown when the thumbnail is clicked. Optional fields: website, paperurl, github.
+Co-author links: add 'Full Name': 'url' to collaborators.json (names without an entry are shown as plain text)."""
 import json, html, os, re, datetime
 from collections import OrderedDict
 tools = os.path.dirname(os.path.abspath(__file__))
@@ -25,8 +26,20 @@ def thumb(p):
             return f'<img src="assets/{p["slug"]}/thumb.{ext}"{full} alt="" loading="lazy">'
     return ''
 
+COLLAB = json.load(open(os.path.join(tools, 'collaborators.json')))   # name -> homepage; names not listed stay plain text
+
 def authors(s):
-    return esc(s).replace('Qihang Li', '<b>Qihang Li</b>')
+    out = []
+    for tok in s.split(', '):
+        m = re.match(r'^(.*?)([\u2020*]*)$', tok)
+        name, mark = m.group(1), m.group(2)
+        if name == 'Qihang Li':
+            out.append(f'<b>Qihang Li</b>{esc(mark)}')
+        elif name in COLLAB:
+            out.append(f'<a href="{COLLAB[name]}">{esc(name)}</a>{esc(mark)}')
+        else:
+            out.append(esc(tok))
+    return ', '.join(out)
 
 def entry(p):
     links = []
