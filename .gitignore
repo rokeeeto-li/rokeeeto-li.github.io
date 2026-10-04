@@ -1,2 +1,12 @@
-_site/
-
+# macOS / editors
+.DS_Store
+*.swp
+.vscode/
+.idea/
+# Python
+__pycache__/
+*.pyc
+# Local backups made by tools/shrink_images.py and unfinished/private media
+assets/*/_original.*
+assets/**/_*
+*.log

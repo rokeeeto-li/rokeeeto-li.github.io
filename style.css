@@ -1,0 +1,62 @@
+:root{--bg:#fff;--fg:#1f2328;--muted:#6b7280;--link:#1a56a7;--rule:#e5e7eb;--accent:#b1292b;--ph:#f1f3f5}
+:root[data-theme="dark"]{--bg:#14161a;--fg:#e6e8eb;--muted:#9aa3ad;--link:#6cb0ff;--rule:#2a2e35;--accent:#ff7b7e;--ph:#1d2026;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Open Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:56px 24px 40px}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.top{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
+.avatar{width:220px;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:4px;display:block;background:var(--ph)}
+.contact{list-style:none;padding:0;margin:14px 0 0;font-size:.93rem}
+.contact li{display:flex;gap:10px;margin:.3em 0}
+.contact span{flex:0 0 58px;color:var(--muted)}
+.intro h1{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
+.intro p{margin:.7em 0}
+h2{font-size:1.35rem;margin:48px 0 12px;font-weight:700}
+h2 .tabs{font-weight:700}
+.tab{color:var(--link)}
+.tab.active{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+.filters{font-size:.97rem;line-height:1.9;margin:.4em 0 1.2em}
+ul.news{list-style:none;padding:0;margin:0}
+ul.news li{display:flex;gap:16px;margin:.55em 0}
+.date{flex:0 0 74px;color:var(--muted);font-size:.92rem}
+.view[hidden],.grp[hidden]{display:none}
+.grp h4{font-size:1.05rem;margin:28px 0 6px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule);padding-bottom:4px}
+ul.pubs{list-style:none;padding:0;margin:0}
+.pub{display:grid;grid-template-columns:240px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.pub:last-child{border-bottom:0}
+.thumb{width:240px;aspect-ratio:16/9;border-radius:8px;background:var(--ph);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb img.fit{object-fit:contain}
+.ptitle{font-weight:700;line-height:1.4;margin-bottom:2px}
+.authors{font-size:.94rem}
+.venue{font-size:.92rem;color:var(--muted)}
+.links{font-size:.92rem;margin-top:2px}
+.links a{margin-right:.9em}
+.links a::before{content:"["}.links a::after{content:"]"}
+.award{color:var(--accent);font-weight:600}
+.note{color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;padding-top:18px;border-top:1px solid var(--rule)}
+@media(max-width:720px){
+ .top{grid-template-columns:1fr;gap:22px}
+ .side{display:flex;gap:18px;align-items:center}
+ .avatar{width:120px;flex:none}
+ .contact{margin:0}
+ .pub{grid-template-columns:1fr}
+ .thumb{width:100%;height:auto;aspect-ratio:16/9}
+ .thumb:empty{display:none}
+}
+
+body{transition:background .2s,color .2s}
+.theme-toggle{position:fixed;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:var(--bg);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;z-index:10}
+.theme-toggle:hover{border-color:var(--muted)}
+.theme-toggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle .moon{display:block}.theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:block}
+
+.thumb img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.82);display:flex;align-items:center;justify-content:center;padding:32px;cursor:zoom-out;opacity:0;pointer-events:none;transition:opacity .18s}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox img,.lightbox video{max-width:100%;max-height:100%;border-radius:8px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.lightbox .cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:#ddd;font-size:.85rem;padding:0 24px}
+.lightbox video{display:none;cursor:default}
