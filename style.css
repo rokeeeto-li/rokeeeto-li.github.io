@@ -62,5 +62,5 @@ body{transition:background .2s,color .2s}
 .lightbox video{display:none;cursor:default}
 
 /* Dim bright photos/figures in dark mode so they don't glare */
-:root[data-theme="dark"] .avatar{filter:brightness(.62) contrast(.95) saturate(.9)}
-:root[data-theme="dark"] .thumb img{filter:brightness(.74) contrast(.95)}
+:root[data-theme="dark"] .avatar{filter:brightness(.72) contrast(.96) saturate(.92)}
+:root[data-theme="dark"] .thumb img{filter:brightness(.8) contrast(.96)}
