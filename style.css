@@ -10,7 +10,7 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 .contact li{display:flex;gap:10px;margin:.3em 0}
 .contact span{flex:0 0 58px;color:var(--muted)}
 .intro h1{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
-.intro p{margin:.7em 0}
+.intro p{margin:.7em 0;text-wrap:pretty}
 h2{font-size:1.35rem;margin:48px 0 12px;font-weight:700}
 h2 .tabs{font-weight:700}
 .tab{color:var(--link)}
