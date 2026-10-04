@@ -4,12 +4,13 @@
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Open Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:960px;margin:0 auto;padding:56px 24px 40px}
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
-.top{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
+.top{display:grid;grid-template-columns:220px 1fr;grid-template-areas:"side name" "side intro";grid-template-rows:auto 1fr;column-gap:40px;align-items:start}
+.side{grid-area:side}.name{grid-area:name}.intro{grid-area:intro}
 .avatar{width:220px;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:4px;display:block;background:var(--ph)}
 .contact{list-style:none;padding:0;margin:14px 0 0;font-size:.93rem}
 .contact li{display:flex;gap:10px;margin:.3em 0}
 .contact span{flex:0 0 58px;color:var(--muted)}
-.intro h1{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
+.name{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
 .intro p{margin:.7em 0;text-wrap:pretty}
 h2{font-size:1.35rem;margin:48px 0 12px;font-weight:700}
 h2 .tabs{font-weight:700}
@@ -39,10 +40,17 @@ ul.pubs{list-style:none;padding:0;margin:0}
 .note{color:var(--muted)}
 footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;padding-top:18px;border-top:1px solid var(--rule)}
 @media(max-width:720px){
- .top{grid-template-columns:1fr;gap:22px}
- .side{display:flex;gap:18px;align-items:center}
- .avatar{width:120px;flex:none}
- .contact{margin:0}
+ .wrap{padding:60px 20px 32px}
+ body{font-size:15.5px}
+ .top{grid-template-columns:1fr;grid-template-areas:"name" "side" "intro";grid-template-rows:auto;row-gap:16px}
+ .name{font-size:1.9rem;margin:0}
+ .side{display:flex;gap:16px;align-items:center}
+ .avatar{width:112px;flex:none}
+ .contact{margin:0;font-size:.9rem}
+ .contact li{gap:8px}
+ .contact span{flex:0 0 58px}
+ .theme-toggle{position:absolute;top:14px;right:14px;width:34px;height:34px}
+ .theme-toggle svg{width:16px;height:16px}
  .pub{grid-template-columns:1fr}
  .thumb{width:100%;height:auto;aspect-ratio:16/9}
  .thumb:empty{display:none}
