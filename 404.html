@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found | Qihang Li</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/style.css">
+<script>
+// The CERPE project page used to live at /cerpe.github.io/. Send any old path (files, anchors) to /cerpe/.
+(function () {
+  var old = '/cerpe.github.io/', p = location.pathname;
+  if (p === old.slice(0, -1) || p.indexOf(old) === 0) {
+    location.replace('/cerpe/' + p.slice(old.length) + location.search + location.hash);
+  }
+})();
+try { if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+</script>
+</head><body>
+<div class="wrap">
+<h1 class="name">Page not found</h1>
+<p>The page you are looking for does not exist. Go back to the <a href="/">homepage</a>.</p>
+</div>
+</body></html>
