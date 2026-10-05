@@ -33,7 +33,7 @@ h2{font-size:1.35rem;margin:48px 0 12px;font-weight:700}
 h3{font-size:1rem;margin:0 0 .2em}
 p{margin:.7em 0}
 .tldr{margin:1.1em 0 0;padding-left:14px;border-left:3px solid var(--rule);color:var(--muted)}
-.tldr strong{color:var(--fg)}
+.tldr strong{font-weight:400;opacity:.8}
 .lead{color:var(--muted);margin:0 0 .4em}
 
 /* method */
