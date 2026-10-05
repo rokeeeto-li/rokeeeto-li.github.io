@@ -10,7 +10,11 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 .contact{list-style:none;padding:0;margin:14px 0 0;font-size:.93rem}
 .contact li{display:flex;gap:10px;margin:.3em 0}
 .contact span{flex:0 0 58px;color:var(--muted)}
-.name{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
+.name{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em;display:flex;align-items:center;gap:.3em}
+.name .logo{width:1.35em;height:1.35em;margin:-.15em 0 -.15em -.1em;flex:none}
+.name .logo-dark{display:none}
+:root[data-theme="dark"] .name .logo{display:none}
+:root[data-theme="dark"] .name .logo-dark{display:block}
 .intro p{margin:.7em 0;text-wrap:pretty}
 h2{font-size:1.35rem;margin:48px 0 12px;font-weight:700}
 h2 .tabs{font-weight:700}
