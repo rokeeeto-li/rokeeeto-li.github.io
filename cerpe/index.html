@@ -54,16 +54,16 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  <p class="text lead">Descriptor screening is deliberately separated from pose inference, so raw RGB transmission occurs only after gate activation.</p>
  <div class="panel">
  <div class="seg" role="tablist" aria-label="Method steps">
-  <button type="button" role="tab" aria-selected="true" class="is-active" data-step data-box="0.5,2,33,96" data-title="Screen" data-text="SALAD encodes each observation into a fixed-size descriptor. Descriptor similarity serves as an online proxy for candidate visual overlap.">1. Screen</button><button type="button" role="tab" aria-selected="false" data-step data-box="17.5,36,61.5,62" data-title="Anchor" data-text="Gate activation requests the collaborator&#39;s image. VGGT estimates a direct pose, with metric scale recovered from aligned depth.">2. Anchor</button><button type="button" role="tab" aria-selected="false" data-step data-box="51,74,28,24" data-title="Propagate" data-text="Without a candidate overlap, the latest direct anchor is propagated in SE(3) using metric ego-motion from both robots.">3. Propagate</button>
+  <button type="button" role="tab" aria-selected="true" class="is-active" data-step data-box="" data-title="Overview" data-text="Each direct cross-robot estimate becomes a pose anchor. When the gate is inactive, CERPE combines that anchor with both robots&#39; metric ego-motion instead of requesting another remote image.">Overview</button><button type="button" role="tab" aria-selected="false" data-step data-box="0.5,2,33,96" data-title="Screen" data-text="SALAD encodes each observation into a fixed-size descriptor. Descriptor similarity serves as an online proxy for candidate visual overlap.">Screen</button><button type="button" role="tab" aria-selected="false" data-step data-box="17.5,36,61.5,62" data-title="Anchor" data-text="Gate activation requests the collaborator&#39;s image. VGGT estimates a direct pose, with metric scale recovered from aligned depth.">Anchor</button><button type="button" role="tab" aria-selected="false" data-step data-box="51,74,28,24" data-title="Propagate" data-text="Without a candidate overlap, the latest direct anchor is propagated in SE(3) using metric ego-motion from both robots.">Propagate</button>
  </div>
  <figure class="hlfig">
   <div class="frame">
    <img src="../assets/cerpe/cerpe_method.jpeg" width="4932" height="1751" alt="CERPE method overview showing descriptor-gated communication, direct relative pose estimation, and SE(3) propagation">
-   <span class="hl" id="step-hl" style="left:0.5%;top:2%;width:33%;height:96%"></span>
+   <span class="hl off" id="step-hl"></span>
   </div>
  </figure>
- <div class="step-text"><h3 id="step-title">Screen</h3><p id="step-body">SALAD encodes each observation into a fixed-size descriptor. Descriptor similarity serves as an online proxy for candidate visual overlap.</p></div>
- <p class="note">Each direct cross-robot estimate becomes a pose anchor. When the gate is inactive, CERPE combines that anchor with both robots' metric ego-motion instead of requesting another remote image. Click the figure to enlarge it.</p>
+ <div class="step-text"><h3 id="step-title">Overview</h3><p id="step-body">Each direct cross-robot estimate becomes a pose anchor. When the gate is inactive, CERPE combines that anchor with both robots&#39; metric ego-motion instead of requesting another remote image.</p></div>
+ <p class="note">Click the figure to enlarge it.</p>
  </div>
 </section>
 

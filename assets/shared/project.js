@@ -58,6 +58,7 @@
         t.setAttribute('aria-selected', String(on));
       });
       var b = (tab.dataset.box || '').split(',');
+      hl.classList.toggle('off', b.length !== 4);
       if (b.length === 4) { hl.style.left = b[0] + '%'; hl.style.top = b[1] + '%'; hl.style.width = b[2] + '%'; hl.style.height = b[3] + '%'; }
       title.textContent = tab.dataset.title || ''; body.textContent = tab.dataset.text || '';
     });

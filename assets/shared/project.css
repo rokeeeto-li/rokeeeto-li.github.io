@@ -118,8 +118,9 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 /* Method figure with a highlighted region: tabs move the .hl box over the image and swap the step text below. */
 .hlfig .frame{position:relative;overflow:hidden;border-radius:6px;line-height:0}
 .hlfig .frame img{display:block}
-.hl{position:absolute;border:2px solid var(--accent);border-radius:4px;box-shadow:0 0 0 100vmax rgba(255,255,255,.58);pointer-events:none;transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease}
+.hl{position:absolute;left:0;top:0;width:100%;height:100%;border:2px solid var(--accent);border-radius:4px;box-shadow:0 0 0 100vmax rgba(255,255,255,.58);pointer-events:none;transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease}
 :root[data-theme="dark"] .hl{box-shadow:0 0 0 100vmax rgba(20,20,20,.6)}
+.hl.off{opacity:0}
 .step-text{margin-top:12px}
 .step-text p{margin:.2em 0 0;font-size:.95rem}
 @media (prefers-reduced-motion:reduce){.hl{transition:none}}
@@ -138,4 +139,6 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 @media(max-width:720px){
  .panel.plain{padding:0;border:0}
  .panel{padding:10px 10px 12px}
+ .panel .seg{gap:2px}
+ .panel .seg button{padding:2px 9px;font-size:.92rem}
 }

@@ -58,16 +58,16 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  <p class="text lead">One sentence introducing the figure.</p>
  <div class="panel">
  <div class="seg" role="tablist" aria-label="Method steps">
-  <button type="button" role="tab" aria-selected="true" class="is-active" data-step data-box="0.5,2,33,96" data-title="Step one" data-text="Short description.">1. Step one</button><button type="button" role="tab" aria-selected="false" data-step data-box="17.5,36,61.5,62" data-title="Step two" data-text="Short description.">2. Step two</button><button type="button" role="tab" aria-selected="false" data-step data-box="51,74,28,24" data-title="Step three" data-text="Short description.">3. Step three</button>
+  <button type="button" role="tab" aria-selected="true" class="is-active" data-step data-box="" data-title="Overview" data-text="Short description of the whole figure.">Overview</button><button type="button" role="tab" aria-selected="false" data-step data-box="0.5,2,33,96" data-title="Step one" data-text="Short description.">Step one</button><button type="button" role="tab" aria-selected="false" data-step data-box="17.5,36,61.5,62" data-title="Step two" data-text="Short description.">Step two</button><button type="button" role="tab" aria-selected="false" data-step data-box="51,74,28,24" data-title="Step three" data-text="Short description.">Step three</button>
  </div>
  <figure class="hlfig">
   <div class="frame">
    <img src="../assets/SLUG/method.jpg" width="1600" height="900" alt="Method overview">
-   <span class="hl" id="step-hl" style="left:0.5%;top:2%;width:30.5%;height:96%"></span>
+   <span class="hl off" id="step-hl"></span>
   </div>
  </figure>
- <div class="step-text"><h3 id="step-title">Step one</h3><p id="step-body">Short description.</p></div>
- <p class="note">Caption. Each tab highlights a region of the figure: set data-box=&quot;left,top,width,height&quot; in percent of the image.</p>
+ <div class="step-text"><h3 id="step-title">Overview</h3><p id="step-body">Short description of the whole figure.</p></div>
+ <p class="note">Click the figure to enlarge it. The Overview tab shows the whole figure; the other tabs highlight a region: set data-box="left,top,width,height" in percent of the image.</p>
  </div>
 </section>
 
