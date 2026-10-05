@@ -154,10 +154,6 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 .defs dt:first-child{margin-top:0}
 .defs dd{margin:.1em 0 0;color:var(--muted)}
 .finding{margin:.2em 0 0}
-.tbar{margin:10px 0 0}
-.toggle{font:inherit;font-size:.85rem;color:var(--link);background:none;border:1px solid var(--rule);border-radius:999px;padding:2px 12px;cursor:pointer}
-.toggle:hover{background:var(--soft)}
-table.hide-x .x{display:none}
 /* .split: text on the left, a figure on the right (stacks on phones). .more: collapsible extra figure. */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:8px 28px;align-items:center;margin-top:8px}
 .split figure{margin:0}
@@ -170,3 +166,9 @@ table.hide-x .x{display:none}
 .split.overview .text p:first-child{margin-top:0}
 .split.overview figure figcaption{margin-top:6px}
 @media (max-width:720px){.split.overview{display:block}}
+/* Hover/tap tooltip for table headers (see project.js): <th class="tipped" tabindex="0" data-tip-title data-tip-text data-tip-set>. */
+.tipped{cursor:help;text-decoration:underline dotted var(--muted);text-underline-offset:3px}
+.tip{position:fixed;z-index:60;max-width:280px;padding:10px 12px;background:var(--bg);border:1px solid var(--rule);border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.14);font-size:.85rem;line-height:1.5;text-align:left;font-weight:400;color:var(--fg);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s}
+.tip.on{opacity:1;visibility:visible}
+.tip strong{display:block;margin-bottom:2px}
+.tip .set{display:block;margin-top:6px;color:var(--muted)}

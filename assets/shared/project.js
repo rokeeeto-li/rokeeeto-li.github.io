@@ -65,18 +65,35 @@
   });
 })();
 
-/* Table column toggle: <button id="exec-toggle"> shows/hides the cells marked class="x" in <table id="results-table" class="hide-x">;
-   group headers marked data-cols change colspan between 2 (hidden) and 3 (shown). */
+/* Tooltip: elements with data-tip-title / data-tip-text / data-tip-set show a small card after a short hover, on focus, or on tap. */
 (function () {
-  var btn = document.getElementById('exec-toggle');
-  var table = document.getElementById('results-table');
-  if (!btn || !table) return;
-  btn.addEventListener('click', function () {
-    var hidden = table.classList.toggle('hide-x');
-    btn.setAttribute('aria-pressed', String(!hidden));
-    btn.textContent = hidden ? 'Show execution time' : 'Hide execution time';
-    table.querySelectorAll('th[data-cols]').forEach(function (th) { th.colSpan = hidden ? 2 : 3; });
+  var els = document.querySelectorAll('[data-tip-title]');
+  if (!els.length) return;
+  var tip = document.createElement('div');
+  tip.className = 'tip'; tip.setAttribute('role', 'tooltip');
+  document.body.appendChild(tip);
+  var timer = null, current = null;
+  function hide() { clearTimeout(timer); tip.classList.remove('on'); current = null; }
+  function show(el) {
+    tip.textContent = '';
+    var t = document.createElement('strong'); t.textContent = el.dataset.tipTitle; tip.appendChild(t);
+    tip.appendChild(document.createTextNode(el.dataset.tipText || ''));
+    if (el.dataset.tipSet) { var s = document.createElement('span'); s.className = 'set'; s.textContent = 'Setting: ' + el.dataset.tipSet; tip.appendChild(s); }
+    var r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
+    var top = r.bottom + 8; if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    tip.classList.add('on'); current = el;
+  }
+  els.forEach(function (el) {
+    el.addEventListener('mouseenter', function () { clearTimeout(timer); timer = setTimeout(function () { show(el); }, 350); });
+    el.addEventListener('mouseleave', hide);
+    el.addEventListener('focus', function () { show(el); });
+    el.addEventListener('blur', hide);
+    el.addEventListener('click', function () { if (current === el) hide(); else show(el); });
   });
+  window.addEventListener('scroll', hide, { passive: true });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
 })();
 
 /* Video switcher: <button data-video data-src data-title data-caption>
