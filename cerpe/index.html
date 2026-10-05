@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CERPE: Communication-Efficient Relative Pose Estimation</title>
+<meta name="description" content="CERPE: Communication-Efficient Relative Pose Estimation with Vision Foundation Models for Ephemeral Collaborative Perception (IROS 2026).">
+<meta name="keywords" content="CERPE, relative pose estimation, collaborative perception, large-scale pre-trained vision models, multi-robot systems">
+<meta property="og:title" content="CERPE: Communication-Efficient Relative Pose Estimation">
+<meta property="og:description" content="Relative pose estimation for robots that meet briefly and share limited information. IROS 2026.">
+<meta property="og:image" content="https://qihangli.com/assets/cerpe/hero-campus-crop.jpg">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared/project.css">
+<script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
+<script src="../assets/shared/project.js" defer></script>
+</head><body>
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+ <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+ <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<div class="wrap">
+
+<a class="back" href="https://qihangli.com/">&larr; Qihang Li</a>
+
+<header>
+ <p class="kicker">CERPE &middot; IROS 2026</p>
+ <h1>Communication-Efficient Relative Pose Estimation with Vision Foundation Models for Ephemeral Collaborative Perception</h1>
+ <p class="authors" aria-label="Authors">
+  <span><a href="https://qihangli.com/">Qihang Li</a><sup>1</sup></span>
+  <span>Jo-Hao Huang<sup>1</sup></span>
+  <span>Jiewen Liu<sup>1</sup></span>
+  <span><a href="https://suyoung1222.github.io/online-cv/">Suyoung Kang</a><sup>2</sup></span>
+  <span><a href="https://hcr.cs.umass.edu/people/hzhang/">Hao Zhang</a><sup>2</sup></span>
+  <span><a href="https://research.csc.ncsu.edu/corob/team.html">Peng Gao</a><sup>1</sup></span>
+ </p>
+ <p class="affil"><span><sup>1</sup> North Carolina State University</span><span><sup>2</sup> University of Massachusetts Amherst</span></p>
+ <p class="links"><a href="https://arxiv.org/abs/2607.14539">Paper</a><a href="../assets/cerpe/CERPE_IROS_2026.pdf">PDF</a><a href="#deployment">Video</a><a href="#citation">BibTeX</a></p>
+</header>
+
+<main>
+<section id="overview">
+ <h2>Overview</h2>
+ <div class="text">
+  <p>Relative pose estimation is fundamental to collaborative perception and coordination, yet robots often meet only briefly, communicate over limited bandwidth, and lose visual overlap through occlusion or restricted fields of view. Existing approaches commonly rely on global references, sustained overlap, or expensive visual transmission.</p>
+  <p>CERPE is a system-level framework that coordinates existing large-scale pre-trained vision models for metric ego-motion and inter-robot relative pose estimation. Robots continuously exchange fixed-size descriptors and local poses; descriptor similarity gates event-triggered raw-image requests. Direct estimates anchor the relative geometry when views overlap, while metrically scaled ego-motion propagates the latest anchor through non-overlapping intervals.</p>
+  <p class="tldr"><strong>In one line:</strong> screen overlap cheaply, request pixels selectively, and preserve pose continuity when the shared view disappears.</p>
+ </div>
+</section>
+
+<section id="approach">
+ <h2>Method</h2>
+ <p class="text lead">Descriptor screening is deliberately separated from pose inference, so raw RGB transmission occurs only after gate activation.</p>
+ <figure>
+  <img src="../assets/cerpe/cerpe_method.jpeg" width="4932" height="1751" alt="CERPE method overview showing descriptor-gated communication, direct relative pose estimation, and SE(3) propagation">
+  <figcaption>Each direct cross-robot estimate becomes a pose anchor. When the gate is inactive, CERPE combines that anchor with both robots' metric ego-motion instead of requesting another remote image.</figcaption>
+ </figure>
+ <div class="steps">
+  <div class="step"><span class="num">01</span><h3>Screen</h3><p>SALAD encodes each observation into a fixed-size descriptor. Descriptor similarity serves as an online proxy for candidate visual overlap.</p></div>
+  <div class="step"><span class="num">02</span><h3>Anchor</h3><p>Gate activation requests the collaborator's image. VGGT estimates a direct pose, with metric scale recovered from aligned depth.</p></div>
+  <div class="step"><span class="num">03</span><h3>Propagate</h3><p>Without a candidate overlap, the latest direct anchor is propagated in SE(3) using metric ego-motion from both robots.</p></div>
+ </div>
+</section>
+
+<section id="results">
+ <h2>Results</h2>
+ <p class="text lead">We evaluate CERPE in CARLA simulation, real-world connected autonomous driving, and indoor physical robot teams.</p>
+ <div class="table-wrap" tabindex="0" aria-label="Scrollable quantitative results table">
+  <table>
+   <thead>
+    <tr><th rowspan="2">Method</th><th colspan="3">CAD simulation</th><th colspan="3">Real-world CAD</th><th colspan="3">Physical robots</th></tr>
+    <tr>
+     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
+     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
+     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr><th>SuperGlue</th><td>16.00<sup>&Dagger;</sup></td><td>0.895</td><td>77.5</td><td>7.62<sup>&Dagger;</sup></td><td>0.169</td><td>93.7</td><td>0.12<sup>&Dagger;</sup></td><td>0.165</td><td>98.4</td></tr>
+    <tr><th>NOPE</th><td>9.41</td><td>0.776</td><td>33.4</td><td>39.41</td><td>1.682</td><td>45.0</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><th>Co-VisNet</th><td>16.22</td><td>0.906</td><td>100</td><td>29.95</td><td>0.271</td><td>100</td><td>0.88</td><td>0.257</td><td>100</td></tr>
+    <tr class="muted"><th>CERPE w/o EM</th><td>5.03 / 3.51<sup>&Dagger;</sup></td><td>0.128</td><td>100</td><td>10.27 / 5.84<sup>&Dagger;</sup></td><td>0.063</td><td>100</td><td>0.45 / 0.09<sup>&Dagger;</sup></td><td>0.096</td><td>100</td></tr>
+    <tr class="ours"><th>CERPE</th><td>8.66 / 5.06<sup>&Dagger;</sup></td><td>0.089</td><td>100</td><td>8.26 / 2.94<sup>&Dagger;</sup></td><td>0.063</td><td>100</td><td>0.54 / 0.11<sup>&Dagger;</sup></td><td>0.086</td><td>100</td></tr>
+   </tbody>
+  </table>
+ </div>
+ <p class="hint">Swipe sideways to see all columns.</p>
+ <p class="note"><sup>&Dagger;</sup> Translation with ground-truth scale. CERPE rows report predicted-scale / GT-scale translation. Errors are reported over successful pairs.</p>
+
+ <div class="seg" role="tablist" aria-label="Qualitative result setting">
+  <button class="is-active" type="button" role="tab" aria-selected="true" data-result="carla" data-src="../assets/cerpe/carla_quali.jpg" data-w="3090" data-h="2234" data-alt="CERPE qualitative results in CARLA" data-caption="CARLA encounters transition between overlapping and non-overlapping views as vehicles cross an intersection. CERPE maintains a temporally stable relative trajectory through the transition.">CARLA</button><button type="button" role="tab" aria-selected="false" data-result="mars" data-src="../assets/cerpe/mars_quali.jpg" data-w="3143" data-h="2261" data-alt="CERPE qualitative results in the OpenMars real-world driving dataset" data-caption="OpenMars contains longer trajectories and extended low-overlap periods. Direct estimates correct accumulated drift when overlap resumes.">OpenMars</button><button type="button" role="tab" aria-selected="false" data-result="robots" data-src="../assets/cerpe/physical_robot_team.jpg" data-w="2874" data-h="2436" data-alt="CERPE qualitative results on indoor physical robot teams" data-caption="Indoor teams introduce close-range perspective changes, occlusion, and dynamic objects. Quantitative accuracy is measured on mocap-covered samples.">Indoor robots</button>
+ </div>
+ <figure>
+  <img id="result-image" src="../assets/cerpe/carla_quali.jpg" width="3090" height="2234" alt="CERPE qualitative results in CARLA">
+  <figcaption id="result-caption">CARLA encounters transition between overlapping and non-overlapping views as vehicles cross an intersection. CERPE maintains a temporally stable relative trajectory through the transition.</figcaption>
+ </figure>
+
+ <figure>
+  <img src="../assets/cerpe/error_analysis.png" width="2549" height="1818" loading="lazy" alt="Pose error across visual overlap ratios and relative viewing angles">
+  <figcaption>CERPE remains comparatively stable across reduced visual overlap and large relative viewing angles. Propagation is a continuity mechanism, not a uniform accuracy boost: it can introduce scale and translation drift when direct overlap constraints are already strong.</figcaption>
+ </figure>
+</section>
+
+<section id="deployment">
+ <h2>Online deployment</h2>
+ <p class="text lead">Real-time relative pose estimation on robot teams, running on a laptop.</p>
+ <div class="seg" role="tablist" aria-label="Robot deployment videos">
+  <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="deployment-video" data-video="0" data-src="https://www.youtube-nocookie.com/embed/f-IYKQ4XJKs?rel=0" data-title="CERPE Demo Campus 01" data-caption="CERPE Campus 01 demonstration.">Campus 01</button><button type="button" role="tab" aria-selected="false" aria-controls="deployment-video" data-video="1" data-src="https://www.youtube-nocookie.com/embed/tF44yfTIi_E?rel=0" data-title="CERPE Demo Campus 02" data-caption="CERPE Campus 02 demonstration.">Campus 02</button><button type="button" role="tab" aria-selected="false" aria-controls="deployment-video" data-video="2" data-src="https://www.youtube-nocookie.com/embed/WJws7E5LPLE?rel=0" data-title="CERPE Demo Campus 03" data-caption="CERPE Campus 03 demonstration.">Campus 03</button><button type="button" role="tab" aria-selected="false" aria-controls="deployment-video" data-video="3" data-src="https://www.youtube-nocookie.com/embed/l08B09iKrHo?rel=0" data-title="CERPE Demo Join Team" data-caption="CERPE Join Team demonstration.">Join Team</button>
+ </div>
+ <div class="video-frame">
+  <iframe id="deployment-video" src="https://www.youtube-nocookie.com/embed/f-IYKQ4XJKs?rel=0" title="CERPE Demo Campus 01" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+ </div>
+ <p class="note" id="deployment-video-caption">CERPE Campus 01 demonstration.</p>
+ <p class="text note"><strong>Evaluation scope.</strong> These videos demonstrate online execution and system integration. Quantitative physical-robot accuracy is reported on the sampled motion-capture-covered scenarios in the paper.</p>
+</section>
+
+<section id="citation">
+ <h2>Citation</h2>
+ <p class="text lead">Please cite the paper when using CERPE or its evaluation results.</p>
+ <div class="bib">
+  <button class="copy" type="button">Copy</button>
+<pre><code id="bibtex-code">@inproceedings{li2026cerpe,
+  title     = {Communication-Efficient Relative Pose Estimation with Vision Foundation Models for Ephemeral Collaborative Perception},
+  author    = {Li, Qihang and Huang, Jo-Hao and Liu, Jiewen and Kang, Suyoung and Zhang, Hao and Gao, Peng},
+  booktitle = {2026 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2026}
+}</code></pre>
+ </div>
+ <span class="copy-status" role="status" aria-live="polite"></span>
+ <p class="text">Contact: <a href="mailto:qli39@ncsu.edu">qli39@ncsu.edu</a>, <a href="mailto:pgao5@ncsu.edu">pgao5@ncsu.edu</a></p>
+</section>
+</main>
+
+<footer>&copy; 2026 Qihang Li, Jo-Hao Huang, Jiewen Liu, Suyoung Kang, Hao Zhang, and Peng Gao. &middot; <a href="https://qihangli.com/">qihangli.com</a></footer>
+</div>
+<div class="lb" id="lightbox" role="dialog" aria-label="Enlarged figure"><img alt=""></div>
+</body></html>
