@@ -113,3 +113,20 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
  .affil span{display:block;margin-left:0}
  .affil span+span{margin-left:0}
 }
+
+/* .panel: rounded box around a switchable block (pill tabs + figure/video + caption). .panel.plain keeps a fixed block aligned with it. */
+.panel{border:1px solid var(--rule);border-radius:10px;padding:12px 14px 14px;background:var(--soft)}
+.panel.plain{border-color:transparent;background:none}
+.panel .seg{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.panel .seg button{padding:2px 12px;border:1px solid transparent;border-radius:999px;line-height:1.6}
+.panel .seg button::after{content:none}
+.panel .seg button:hover{text-decoration:none;background:var(--bg)}
+.panel .seg button.is-active{background:var(--bg);border-color:var(--rule);color:var(--fg);font-weight:600;text-decoration:none}
+.panel .sub{margin:2px 0 12px;padding:2px 0;line-height:1.6}
+.panel>figure{margin:0}
+.panel .video-frame{margin-top:0}
+.panel .note{margin:.6em 0 0}
+@media(max-width:720px){
+ .panel.plain{padding:0;border:0}
+ .panel{padding:10px 10px 12px}
+}
