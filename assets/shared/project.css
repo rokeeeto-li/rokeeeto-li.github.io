@@ -43,8 +43,9 @@ figure.side{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap
 figure.side figcaption{margin-top:0}
 /* .pair: two figures next to each other, each with its own header line and caption below (stacks on phones). */
 .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin-top:26px;align-items:start}
-.pair .seg,.pair .label{margin:0 0 10px;font-size:.97rem;line-height:1.65}
-.pair .label{font-weight:600}
+.pair .label{margin:0 0 2px;font-size:1.02rem;font-weight:600;line-height:1.65}
+.pair .seg,.pair .sub{margin:0 0 10px;font-size:.97rem;line-height:1.65}
+.pair .sub{color:var(--muted)}
 .pair figure{margin:0}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:26px}
 .step{border-top:1px solid var(--rule);padding-top:10px}

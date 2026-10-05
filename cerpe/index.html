@@ -90,6 +90,7 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 
  <div class="pair">
  <div class="cell">
+ <p class="label">Qualitative results</p>
  <div class="seg" role="tablist" aria-label="Qualitative result setting">
   <button class="is-active" type="button" role="tab" aria-selected="true" data-result="carla" data-src="../assets/cerpe/carla_quali.jpg" data-w="3090" data-h="2234" data-alt="CERPE qualitative results in CARLA" data-caption="CARLA encounters transition between overlapping and non-overlapping views as vehicles cross an intersection. CERPE maintains a temporally stable relative trajectory through the transition.">CARLA</button><button type="button" role="tab" aria-selected="false" data-result="mars" data-src="../assets/cerpe/mars_quali.jpg" data-w="3143" data-h="2261" data-alt="CERPE qualitative results in the OpenMars real-world driving dataset" data-caption="OpenMars contains longer trajectories and extended low-overlap periods. Direct estimates correct accumulated drift when overlap resumes.">OpenMars</button><button type="button" role="tab" aria-selected="false" data-result="robots" data-src="../assets/cerpe/physical_robot_team.jpg" data-w="2874" data-h="2436" data-alt="CERPE qualitative results on indoor physical robot teams" data-caption="Indoor teams introduce close-range perspective changes, occlusion, and dynamic objects. Quantitative accuracy is measured on mocap-covered samples.">Indoor robots</button>
  </div>
@@ -99,7 +100,8 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </figure>
  </div>
  <div class="cell">
- <p class="label">Error vs. overlap and viewing angle</p>
+ <p class="label">Error analysis</p>
+ <p class="sub">Error vs. overlap and viewing angle</p>
  <figure>
   <img src="../assets/cerpe/error_analysis.png" width="2549" height="1818" loading="lazy" alt="Pose error across visual overlap ratios and relative viewing angles">
   <figcaption>CERPE remains comparatively stable across reduced visual overlap and large relative viewing angles. Propagation is a continuity mechanism, not a uniform accuracy boost: it can introduce scale and translation drift when direct overlap constraints are already strong.</figcaption>
