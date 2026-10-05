@@ -10,11 +10,11 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared/project.css?v=202610051300">
+<link rel="stylesheet" href="../assets/shared/project.css?v=202610051400">
 <script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}
 if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
 if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
-<script src="../assets/shared/project.js?v=202610051300" defer></script>
+<script src="../assets/shared/project.js?v=202610051400" defer></script>
 </head><body>
 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -41,13 +41,13 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 <section id="overview">
  <h2>Overview</h2>
  <div class="text">
-  <p>A mobile manipulator usually picks a base pose for the next skill, then repositions for the one after. That wastes time when a single pose could support the whole task, but finding such a pose is hard: grasps, placements, and arm motions are still undecided, and early choices change what later skills can reach.</p>
-  <p>SC-BPE is a learned evaluator that scores a candidate base pose together with a plan skeleton, the ordered sequence of Pick and Place actions with their objects and regions. Its scores decide which skeleton&ndash;base pairs a task and motion planner refines first, with the base held fixed for the whole sequence. The model is trained on complete-task outcomes from refinement and simulated execution.</p>
+  <p>Mobile manipulators usually pick a base pose for the next skill and reposition for the one after. Often a single pose could support the whole task, but finding it is hard: grasps and arm motions are not yet decided, and early choices change what later skills can reach.</p>
+  <p>SC-BPE is a learned evaluator that scores a base pose together with a <em>plan skeleton</em>, the ordered Pick and Place actions with their objects and regions. A task and motion planner then refines the highest-scoring pairs first, keeping the base fixed for the whole sequence.</p>
   <p class="tldr"><strong>In one line:</strong> predict whether the whole plan can work from one base pose before spending time on motion planning.</p>
  </div>
  <figure>
-  <img src="../assets/skeleton-base-placement/fig1_motivation.jpg" width="1653" height="855" alt="Swapping two objects between occupied trays: where should the robot stand to complete the whole task, and how the base suitability depends on the temporary buffer">
-  <figcaption>Swapping two objects between occupied trays needs a temporary location. Which base poses work depends on that choice, so evaluating a base means reasoning about the complete plan. Click a figure to enlarge it.</figcaption>
+  <img src="../assets/skeleton-base-placement/fig1_motivation.jpg" width="1653" height="855" alt="Swapping two objects between occupied trays: where should the robot stand to complete the whole task, and how base suitability depends on the temporary buffer">
+  <figcaption>Swapping two objects between occupied trays needs a temporary location. Which base poses work depends on that choice (the skeletons on the right differ only in the buffer), so evaluating a base means reasoning about the complete plan. Click a figure to enlarge it.</figcaption>
  </figure>
 </section>
 
@@ -71,10 +71,11 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 
 <section id="results">
  <h2>Results</h2>
- <p class="text lead">We evaluate three simulated tasks on two robot embodiments, with 29 held-out scenes per setting, and validate the workflow on a physical robot.</p>
+ <p class="text lead">With one fixed base pose, SC-BPE plans faster than random ordering of the same candidates, its scores follow how the plan changes the best base, and it is competitive with methods that move the base between skills.</p>
+
  <div class="pair">
  <div class="cell">
- <p class="label">Task environments</p>
+ <p class="label">Tasks</p>
  <div class="panel">
  <div class="seg" role="tablist" aria-label="Task environment">
   <button class="is-active" type="button" role="tab" aria-selected="true" data-result="t0" data-src="../assets/skeleton-base-placement/task1_shelf.jpg" data-w="734" data-h="524" data-alt="SC-BPE task 1: shelf placement" data-caption="Task 1: a TidyBot transfers objects from a table to a designated shelf level without overlap (2 to 5 objects).">Shelf</button><button type="button" role="tab" aria-selected="false" data-result="t1" data-src="../assets/skeleton-base-placement/task2_tabletop.jpg" data-w="734" data-h="524" data-alt="SC-BPE task 2: tabletop rearrangement" data-caption="Task 2: the TidyBot exchanges the two objects in B2 with the L and R occupants, with B1 and B3 available as buffers (3 or 4 objects).">Tabletop</button><button type="button" role="tab" aria-selected="false" data-result="t2" data-src="../assets/skeleton-base-placement/task3_container.jpg" data-w="734" data-h="524" data-alt="SC-BPE task 3: container placement" data-caption="Task 3: a Unitree Go2W with an AgileX PiPER arm transfers all objects from a source platform into a target container (2 or 3 objects).">Container</button><button type="button" role="tab" aria-selected="false" data-result="t3" data-src="../assets/skeleton-base-placement/real_scene.jpg" data-w="734" data-h="524" data-alt="Scene reconstructed from real-world captures" data-caption="A scene reconstructed from real-world captures: the robot transfers both bananas from the coffee table onto the notebook on the sofa.">Real scene</button>
@@ -86,51 +87,57 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
  </div>
  <div class="cell">
- <p class="label">Planning efficiency</p>
+ <p class="label">Compared methods</p>
  <div class="panel plain">
- <p class="sub">Cumulative success on Task 2&ndash;O3</p>
- <figure>
-  <img src="../assets/skeleton-base-placement/fig5_efficiency.png" width="1041" height="595" loading="lazy" alt="Cumulative scene success versus planning attempts and planning time">
-  <figcaption>Success versus (a) candidate attempts and (b) planning time on 29 test scenes (60 s per candidate, 180 s per scene). SC-BPE succeeds on its first attempt in 86.2% of scenes, random ranking in 2.1%.</figcaption>
- </figure>
+ <dl class="defs">
+  <dt>SC-BPE (ours)</dt><dd>Ranks complete skeleton&ndash;base pairs by surrogate score; the base stays fixed.</dd>
+  <dt>Random Ranking</dt><dd>The same pairs in random order, with the same candidate evaluation.</dd>
+  <dt>Per-Skill Rebase</dt><dd>Geometric base selection, and the base may change between skills.</dd>
+  <dt>Atomic-BPE Rebase</dt><dd>Learned scores for the current skill only, with rebasing between skills.</dd>
+ </dl>
+ <p class="note">Each setting uses 29 held-out scenes; O<em>N</em> means <em>N</em> objects.</p>
  </div>
  </div>
  </div>
 
- <p class="label table-label">Skeleton-conditioned predictions</p>
- <div class="panel plain">
- <p class="sub">Same scene, same objects, same order: only the temporary buffer changes</p>
+ <p class="label table-label">1. Does ranking make planning faster?</p>
+ <p class="text finding">Yes. SC-BPE has higher success and lower planning time than random ordering of the same candidates in all eight settings. On Task 2&ndash;O3 it solves all 29 scenes (random: 28.3%), and its first attempt already succeeds in 86.2% of scenes (random: 2.1%).</p>
+ <figure class="side">
+  <img src="../assets/skeleton-base-placement/fig5_efficiency.png" width="1041" height="595" loading="lazy" alt="Cumulative scene success versus planning attempts and planning time on Task 2-O3">
+  <figcaption>Task 2&ndash;O3: cumulative success versus (a) candidate attempts and (b) planning time, on 29 test scenes (60 s per candidate, 180 s per scene).</figcaption>
+ </figure>
+
+ <p class="label table-label">2. Do the scores reflect the plan?</p>
+ <p class="text finding">Yes. The three skeletons below differ only in the temporary buffer, yet get different score maps. Successful base positions sit toward the left for B1, the right for B3, and a broader central region for B2, and the high-score regions follow.</p>
  <figure class="xscroll">
   <img src="../assets/skeleton-base-placement/fig4_skeleton_scores.png" width="2121" height="475" loading="lazy" alt="Surrogate score maps over sampled base positions for three skeletons that differ only in the temporary buffer">
-  <figcaption>Task 2&ndash;O3. Maps show the maximum surrogate score over five headings. Circles and crosses mark base positions with at least one and no successful candidate evaluation; stars mark predicted maxima. High-score regions follow the buffer: left for B1, central for B2, right for B3. On a phone, swipe sideways to see the whole figure.</figcaption>
+  <figcaption>Task 2&ndash;O3. Maps show the maximum surrogate score over five headings. Circles and crosses mark base positions with at least one and no successful candidate evaluation; stars mark predicted maxima. On a phone, swipe sideways to see the whole figure.</figcaption>
  </figure>
- </div>
 
- <p class="label table-label">Quantitative results</p>
+ <p class="label table-label">3. How does a fixed base compare with rebasing?</p>
+ <p class="text finding">It is competitive. SC-BPE has higher success and lower planning time than both rebasing methods on Task 1. On Task 2&ndash;O4 it ties Per-Skill Rebase at 89.7% success while cutting mean planning time from 124.4 to 75.0 s. Rebasing can win when moving helps: on Task 3&ndash;O2, Per-Skill Rebase reaches 96.6% success against 86.2%.</p>
  <div class="table-wrap" tabindex="0" aria-label="Scrollable quantitative results table">
-  <table class="grouped">
+  <table class="grouped hide-x" id="results-table">
    <thead>
-    <tr><th rowspan="2">Setting</th><th colspan="3">SC-BPE (ours)</th><th colspan="3">Random Ranking</th><th colspan="3">Per-Skill Rebase</th><th colspan="3">Atomic-BPE Rebase</th></tr>
-    <tr><th>SR &uarr;</th><th>Plan &darr;</th><th>Exec &darr;</th><th>SR &uarr;</th><th>Plan &darr;</th><th>Exec &darr;</th><th>SR &uarr;</th><th>Plan &darr;</th><th>Exec &darr;</th><th>SR &uarr;</th><th>Plan &darr;</th><th>Exec &darr;</th></tr>
+    <tr><th rowspan="2">Setting</th><th colspan="2" data-cols>SC-BPE (ours)</th><th colspan="2" data-cols>Random Ranking</th><th colspan="2" data-cols>Per-Skill Rebase</th><th colspan="2" data-cols>Atomic-BPE Rebase</th></tr>
+    <tr><th>SR &uarr;</th><th>Plan &darr;</th><th class="x">Exec &darr;</th><th>SR &uarr;</th><th>Plan &darr;</th><th class="x">Exec &darr;</th><th>SR &uarr;</th><th>Plan &darr;</th><th class="x">Exec &darr;</th><th>SR &uarr;</th><th>Plan &darr;</th><th class="x">Exec &darr;</th></tr>
    </thead>
    <tbody>
-    <tr><th>Task 1 · O2</th><td><b>100.0</b></td><td><b>8.9</b></td><td><b>27.5</b></td><td>86.4</td><td>21.1</td><td><b>27.5</b></td><td><u>93.1</u></td><td>20.3</td><td>31.5</td><td><u>93.1</u></td><td><u>19.9</u></td><td>29.4</td></tr>
-    <tr><th>Task 1 · O3</th><td><b>100.0</b></td><td><b>27.3</b></td><td><u>39.2</u></td><td>83.8</td><td>43.4</td><td><b>39.0</b></td><td>86.2</td><td><u>41.5</u></td><td>45.9</td><td><u>89.7</u></td><td>42.0</td><td>42.3</td></tr>
-    <tr><th>Task 1 · O4</th><td><b>100.0</b></td><td><b>46.0</b></td><td>54.9</td><td><u>80.6</u></td><td>91.0</td><td><b>52.5</b></td><td>72.4</td><td>93.0</td><td>59.7</td><td>79.3</td><td><u>88.0</u></td><td><u>54.8</u></td></tr>
-    <tr><th>Task 1 · O5</th><td><b>82.8</b></td><td><b>121.2</b></td><td><u>65.9</u></td><td><u>69.4</u></td><td>162.9</td><td><b>64.7</b></td><td>55.2</td><td>163.2</td><td>72.4</td><td>69.0</td><td><u>146.3</u></td><td>67.3</td></tr>
-    <tr><th>Task 2 · O3</th><td><b>100.0</b></td><td><b>26.4</b></td><td><b>29.3</b></td><td>28.3</td><td>147.1</td><td><u>30.3</u></td><td>86.2</td><td><u>72.9</u></td><td>31.6</td><td><u>89.7</u></td><td>77.6</td><td>31.9</td></tr>
-    <tr><th>Task 2 · O4</th><td><b>89.7</b></td><td><b>75.0</b></td><td><b>47.9</b></td><td>49.0</td><td>211.8</td><td><u>49.2</u></td><td><b>89.7</b></td><td><u>124.4</u></td><td>54.0</td><td>82.8</td><td>128.6</td><td>51.2</td></tr>
-    <tr><th>Task 3 · O2</th><td><u>86.2</u></td><td><u>52.4</u></td><td><u>34.9</u></td><td>22.1</td><td>108.1</td><td><b>34.8</b></td><td><b>96.6</b></td><td><b>46.9</b></td><td>38.5</td><td>58.6</td><td>75.8</td><td>36.5</td></tr>
-    <tr><th>Task 3 · O3</th><td><b>51.7</b></td><td><b>127.9</b></td><td><u>54.0</u></td><td>8.7</td><td>173.3</td><td><b>52.1</b></td><td><u>44.8</u></td><td><u>145.9</u></td><td>61.4</td><td>31.0</td><td>157.7</td><td>56.1</td></tr>
+    <tr><th>Task 1 · O2</th><td><b>100.0</b></td><td><b>8.9</b></td><td class="x"><b>27.5</b></td><td>86.4</td><td>21.1</td><td class="x"><b>27.5</b></td><td><u>93.1</u></td><td>20.3</td><td class="x">31.5</td><td><u>93.1</u></td><td><u>19.9</u></td><td class="x">29.4</td></tr>
+    <tr><th>Task 1 · O3</th><td><b>100.0</b></td><td><b>27.3</b></td><td class="x"><u>39.2</u></td><td>83.8</td><td>43.4</td><td class="x"><b>39.0</b></td><td>86.2</td><td><u>41.5</u></td><td class="x">45.9</td><td><u>89.7</u></td><td>42.0</td><td class="x">42.3</td></tr>
+    <tr><th>Task 1 · O4</th><td><b>100.0</b></td><td><b>46.0</b></td><td class="x">54.9</td><td><u>80.6</u></td><td>91.0</td><td class="x"><b>52.5</b></td><td>72.4</td><td>93.0</td><td class="x">59.7</td><td>79.3</td><td><u>88.0</u></td><td class="x"><u>54.8</u></td></tr>
+    <tr><th>Task 1 · O5</th><td><b>82.8</b></td><td><b>121.2</b></td><td class="x"><u>65.9</u></td><td><u>69.4</u></td><td>162.9</td><td class="x"><b>64.7</b></td><td>55.2</td><td>163.2</td><td class="x">72.4</td><td>69.0</td><td><u>146.3</u></td><td class="x">67.3</td></tr>
+    <tr><th>Task 2 · O3</th><td><b>100.0</b></td><td><b>26.4</b></td><td class="x"><b>29.3</b></td><td>28.3</td><td>147.1</td><td class="x"><u>30.3</u></td><td>86.2</td><td><u>72.9</u></td><td class="x">31.6</td><td><u>89.7</u></td><td>77.6</td><td class="x">31.9</td></tr>
+    <tr><th>Task 2 · O4</th><td><b>89.7</b></td><td><b>75.0</b></td><td class="x"><b>47.9</b></td><td>49.0</td><td>211.8</td><td class="x"><u>49.2</u></td><td><b>89.7</b></td><td><u>124.4</u></td><td class="x">54.0</td><td>82.8</td><td>128.6</td><td class="x">51.2</td></tr>
+    <tr><th>Task 3 · O2</th><td><u>86.2</u></td><td><u>52.4</u></td><td class="x"><u>34.9</u></td><td>22.1</td><td>108.1</td><td class="x"><b>34.8</b></td><td><b>96.6</b></td><td><b>46.9</b></td><td class="x">38.5</td><td>58.6</td><td>75.8</td><td class="x">36.5</td></tr>
+    <tr><th>Task 3 · O3</th><td><b>51.7</b></td><td><b>127.9</b></td><td class="x"><u>54.0</u></td><td>8.7</td><td>173.3</td><td class="x"><b>52.1</b></td><td><u>44.8</u></td><td><u>145.9</u></td><td class="x">61.4</td><td>31.0</td><td>157.7</td><td class="x">56.1</td></tr>
    </tbody>
   </table>
  </div>
  <p class="hint">Swipe sideways to see all columns.</p>
- <p class="note">SR: success rate (%). Plan: mean planning time over all scenes, including failures (s). Exec: mean execution time over successful scenes (s). Bold marks the best result and underline the second best when the best is unique. Random Ranking orders the same candidates randomly; the two rebasing methods may reposition between skills.</p>
- <div class="text">
-  <p>SC-BPE has higher success and lower planning time than random ordering of the same candidates in all eight settings. On four-object tabletop rearrangement (Task 2&ndash;O4) it matches Per-Skill Rebase at 89.7% success while cutting mean planning time from 124.4 to 75.0 s. Rebasing can pay off where moving between skills helps: on Task 3&ndash;O2, Per-Skill Rebase reaches 96.6% success against 86.2%.</p>
-  <p class="note"><strong>Limitations.</strong> SC-BPE keeps the base fixed, so tasks that need repositioning mid-way are out of scope. The evaluators are trained on simulation labels, separately for each task and robot.</p>
- </div>
+ <p class="tbar"><button class="toggle" id="exec-toggle" type="button" aria-pressed="false">Show execution time</button></p>
+ <p class="note">SR: success rate (%). Plan: mean planning time over all scenes, including failures (s). Exec: mean execution time over successful scenes (s). Bold marks the best result and underline the second best when the best is unique.</p>
+ <p class="note"><strong>Limitations.</strong> SC-BPE keeps the base fixed, so tasks that need repositioning mid-way are out of scope. The evaluators are trained on simulation labels, separately for each task and robot.</p>
 </section>
 
 <section id="demo">
@@ -142,6 +149,7 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
  <p class="note">The evaluator is trained only on labels from a simulated reconstruction of the scene. Visual servoing corrects errors during execution.</p>
  </div>
+ <p class="label table-label">From reconstruction to the real robot</p>
  <figure>
   <img src="../assets/skeleton-base-placement/fig6_real2sim2real.jpg" width="1482" height="1114" loading="lazy" alt="Real-world navigation, simulation navigation, simulation trajectory, and real-world execution">
   <figcaption>Top: real-world localization and navigation (left) and the corresponding navigation in the reconstructed scene (right). Bottom: simulated (left) and physical (right) execution of the second banana's transfer. Orange is the placement trajectory and cyan the post-placement retreat.</figcaption>

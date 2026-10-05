@@ -148,3 +148,13 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 }
 /* .xscroll: a wide figure that scrolls sideways on phones instead of shrinking to unreadable size. */
 @media (max-width:720px){.xscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.xscroll img{width:680px;max-width:none}.xscroll figcaption{position:sticky;left:0;width:calc(100vw - 32px)}}
+/* Definition list for short method/baseline descriptions; .finding = one-sentence answer under a question label; .toggle = small pill button. */
+.defs{margin:0;font-size:.92rem}
+.defs dt{margin-top:.8em;font-weight:600}
+.defs dt:first-child{margin-top:0}
+.defs dd{margin:.1em 0 0;color:var(--muted)}
+.finding{margin:.2em 0 0}
+.tbar{margin:10px 0 0}
+.toggle{font:inherit;font-size:.85rem;color:var(--link);background:none;border:1px solid var(--rule);border-radius:999px;padding:2px 12px;cursor:pointer}
+.toggle:hover{background:var(--soft)}
+table.hide-x .x{display:none}

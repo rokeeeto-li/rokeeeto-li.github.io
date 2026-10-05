@@ -65,6 +65,20 @@
   });
 })();
 
+/* Table column toggle: <button id="exec-toggle"> shows/hides the cells marked class="x" in <table id="results-table" class="hide-x">;
+   group headers marked data-cols change colspan between 2 (hidden) and 3 (shown). */
+(function () {
+  var btn = document.getElementById('exec-toggle');
+  var table = document.getElementById('results-table');
+  if (!btn || !table) return;
+  btn.addEventListener('click', function () {
+    var hidden = table.classList.toggle('hide-x');
+    btn.setAttribute('aria-pressed', String(!hidden));
+    btn.textContent = hidden ? 'Show execution time' : 'Hide execution time';
+    table.querySelectorAll('th[data-cols]').forEach(function (th) { th.colSpan = hidden ? 2 : 3; });
+  });
+})();
+
 /* Video switcher: <button data-video data-src data-title data-caption>
    updates #deployment-video (an iframe) and #deployment-video-caption. */
 (function () {
