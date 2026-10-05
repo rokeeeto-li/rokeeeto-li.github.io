@@ -42,6 +42,28 @@
   });
 })();
 
+/* Method steps: <button data-step data-box="left,top,width,height" (percent) data-title data-text>
+   moves the highlight #step-hl over the figure and updates #step-title / #step-body. */
+(function () {
+  var hl = document.getElementById('step-hl');
+  var title = document.getElementById('step-title');
+  var body = document.getElementById('step-body');
+  var tabs = document.querySelectorAll('[data-step]');
+  if (!hl || !title || !body) return;
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      var b = (tab.dataset.box || '').split(',');
+      if (b.length === 4) { hl.style.left = b[0] + '%'; hl.style.top = b[1] + '%'; hl.style.width = b[2] + '%'; hl.style.height = b[3] + '%'; }
+      title.textContent = tab.dataset.title || ''; body.textContent = tab.dataset.text || '';
+    });
+  });
+})();
+
 /* Video switcher: <button data-video data-src data-title data-caption>
    updates #deployment-video (an iframe) and #deployment-video-caption. */
 (function () {

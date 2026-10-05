@@ -115,6 +115,14 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
  .affil span+span{margin-left:0}
 }
 
+/* Method figure with a highlighted region: tabs move the .hl box over the image and swap the step text below. */
+.hlfig .frame{position:relative;overflow:hidden;border-radius:6px;line-height:0}
+.hlfig .frame img{display:block}
+.hl{position:absolute;border:2px solid var(--accent);border-radius:4px;box-shadow:0 0 0 100vmax rgba(255,255,255,.58);pointer-events:none;transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease}
+:root[data-theme="dark"] .hl{box-shadow:0 0 0 100vmax rgba(20,20,20,.6)}
+.step-text{margin-top:12px}
+.step-text p{margin:.2em 0 0;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.hl{transition:none}}
 /* .panel: rounded box around a switchable block (pill tabs + figure/video + caption). .panel.plain keeps a fixed block aligned with it. */
 .panel{border:1px solid var(--rule);border-radius:10px;padding:12px 14px 14px;background:var(--soft)}
 .panel.plain{border-color:transparent;background:none}

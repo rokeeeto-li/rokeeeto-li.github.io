@@ -56,14 +56,18 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 <section id="approach">
  <h2>Method</h2>
  <p class="text lead">One sentence introducing the figure.</p>
- <figure>
-  <img src="../assets/SLUG/method.jpg" width="1600" height="900" alt="Method overview">
-  <figcaption>Caption. Clicking a figure opens it larger.</figcaption>
+ <div class="panel">
+ <div class="seg" role="tablist" aria-label="Method steps">
+  <button type="button" role="tab" aria-selected="true" class="is-active" data-step data-box="0.5,2,33,96" data-title="Step one" data-text="Short description.">1. Step one</button><button type="button" role="tab" aria-selected="false" data-step data-box="17.5,36,61.5,62" data-title="Step two" data-text="Short description.">2. Step two</button><button type="button" role="tab" aria-selected="false" data-step data-box="51,74,28,24" data-title="Step three" data-text="Short description.">3. Step three</button>
+ </div>
+ <figure class="hlfig">
+  <div class="frame">
+   <img src="../assets/SLUG/method.jpg" width="1600" height="900" alt="Method overview">
+   <span class="hl" id="step-hl" style="left:0.5%;top:2%;width:30.5%;height:96%"></span>
+  </div>
  </figure>
- <div class="steps">
-  <div class="step"><span class="num">01</span><h3>Step one</h3><p>Short description.</p></div>
-  <div class="step"><span class="num">02</span><h3>Step two</h3><p>Short description.</p></div>
-  <div class="step"><span class="num">03</span><h3>Step three</h3><p>Short description.</p></div>
+ <div class="step-text"><h3 id="step-title">Step one</h3><p id="step-body">Short description.</p></div>
+ <p class="note">Caption. Each tab highlights a region of the figure: set data-box=&quot;left,top,width,height&quot; in percent of the image.</p>
  </div>
 </section>
 
