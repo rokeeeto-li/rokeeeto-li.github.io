@@ -5,7 +5,7 @@
     2. put figures, the paper PDF, etc. in assets/<slug>/ and replace every SLUG below
     3. edit the text; delete any section you do not need (the shared CSS/JS adapt)
     4. add the paper to tools/pubs.json (website: https://qihangli.com/<slug>/) and run python3 tools/build.py
-  Page style: assets/shared/project.css; behaviour: assets/shared/project.js (shared by all project pages).
+  Page style: assets/shared/project.css; behaviour: assets/shared/project.js (shared by all project pages). The ?v= on both links is a cache-buster: change it whenever you edit either shared file, otherwise browsers may keep serving the old copy.
   Optional blocks: results tabs (buttons with data-result), video tabs (data-video), BibTeX copy button.
 -->
 <html lang="en"><head>
@@ -18,11 +18,11 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared/project.css">
+<link rel="stylesheet" href="../assets/shared/project.css?v=202610050108">
 <script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}
 if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
 if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
-<script src="../assets/shared/project.js" defer></script>
+<script src="../assets/shared/project.js?v=202610050108" defer></script>
 </head><body>
 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
