@@ -7,9 +7,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Open Sans",-a
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 img{display:block;max-width:100%;height:auto}
 .wrap{max-width:888px;margin:0 auto;padding:56px 24px 40px}
-.text{max-width:840px}
-/* every block in a section shares the 840px reading column, so figures, tables and text line up */
+.text{max-width:760px}
+/* two widths: running text stays at a 760px measure; figures, panels and tables may use the full 840px. Both start at the same left edge. */
 main section>*{max-width:840px}
+main section>.text,main section>.note,main section>.tldr{max-width:760px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* header */
