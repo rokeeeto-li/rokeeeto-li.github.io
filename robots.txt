@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qihangli.com/sitemap.xml
