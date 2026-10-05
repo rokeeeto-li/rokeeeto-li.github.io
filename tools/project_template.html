@@ -82,13 +82,25 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  <p class="hint">Swipe sideways to see all columns.</p>
  <p class="note">Footnote about the table.</p>
 
+ <!-- Two figures side by side. For a single full-width figure, drop the .pair/.cell wrappers. -->
+ <div class="pair">
+ <div class="cell">
  <div class="seg" role="tablist" aria-label="Qualitative result setting">
   <button class="is-active" type="button" role="tab" aria-selected="true" data-result="a" data-src="../assets/SLUG/result_a.jpg" data-w="1600" data-h="900" data-alt="Result A" data-caption="Caption for A.">Setting A</button><button type="button" role="tab" aria-selected="false" data-result="b" data-src="../assets/SLUG/result_b.jpg" data-w="1600" data-h="900" data-alt="Result B" data-caption="Caption for B.">Setting B</button>
  </div>
- <figure class="side">
+ <figure>
   <img id="result-image" src="../assets/SLUG/result_a.jpg" width="1600" height="900" alt="Result A">
   <figcaption id="result-caption">Caption for A.</figcaption>
  </figure>
+ </div>
+ <div class="cell">
+ <p class="label">Second figure title</p>
+ <figure>
+  <img src="../assets/SLUG/analysis.jpg" width="1600" height="900" loading="lazy" alt="Analysis">
+  <figcaption>Caption for the second figure.</figcaption>
+ </figure>
+ </div>
+ </div>
 </section>
 
 <section id="video">
