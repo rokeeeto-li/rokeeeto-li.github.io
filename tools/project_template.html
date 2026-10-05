@@ -70,19 +70,6 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 <section id="results">
  <h2>Results</h2>
  <p class="text lead">One sentence on the evaluation.</p>
- <div class="table-wrap" tabindex="0" aria-label="Scrollable results table">
-  <table>
-   <thead><tr><th>Method</th><th>Metric A &darr;</th><th>Metric B &uarr;</th></tr></thead>
-   <tbody>
-    <tr><th>Baseline</th><td>0.00</td><td>0.0</td></tr>
-    <tr class="ours"><th>Ours</th><td>0.00</td><td>0.0</td></tr>
-   </tbody>
-  </table>
- </div>
- <p class="hint">Swipe sideways to see all columns.</p>
- <p class="note">Footnote about the table.</p>
-
- <!-- Two figures side by side. For a single full-width figure, drop the .pair/.cell wrappers. -->
  <div class="pair">
  <div class="cell">
  <p class="label">First figure title</p>
@@ -107,6 +94,21 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
  </div>
  </div>
+
+ <p class="label table-label">Quantitative results</p>
+ <div class="table-wrap" tabindex="0" aria-label="Scrollable results table">
+  <table>
+   <thead><tr><th>Method</th><th>Metric A &darr;</th><th>Metric B &uarr;</th></tr></thead>
+   <tbody>
+    <tr><th>Baseline</th><td>0.00</td><td>0.0</td></tr>
+    <tr class="ours"><th>Ours</th><td>0.00</td><td>0.0</td></tr>
+   </tbody>
+  </table>
+ </div>
+ <p class="hint">Swipe sideways to see all columns.</p>
+ <p class="note">Footnote about the table.</p>
+
+ <!-- Two figures side by side. For a single full-width figure, drop the .pair/.cell wrappers. -->
 </section>
 
 <section id="video">

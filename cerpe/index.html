@@ -66,28 +66,6 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 <section id="results">
  <h2>Results</h2>
  <p class="text lead">We evaluate CERPE in CARLA simulation, real-world connected autonomous driving, and indoor physical robot teams. Click a figure to enlarge it.</p>
- <div class="table-wrap" tabindex="0" aria-label="Scrollable quantitative results table">
-  <table>
-   <thead>
-    <tr><th rowspan="2">Method</th><th colspan="3">CAD simulation</th><th colspan="3">Real-world CAD</th><th colspan="3">Physical robots</th></tr>
-    <tr>
-     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
-     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
-     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr><th>SuperGlue</th><td>16.00<sup>&Dagger;</sup></td><td>0.895</td><td>77.5</td><td>7.62<sup>&Dagger;</sup></td><td>0.169</td><td>93.7</td><td>0.12<sup>&Dagger;</sup></td><td>0.165</td><td>98.4</td></tr>
-    <tr><th>NOPE</th><td>9.41</td><td>0.776</td><td>33.4</td><td>39.41</td><td>1.682</td><td>45.0</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-    <tr><th>Co-VisNet</th><td>16.22</td><td>0.906</td><td>100</td><td>29.95</td><td>0.271</td><td>100</td><td>0.88</td><td>0.257</td><td>100</td></tr>
-    <tr class="muted"><th>CERPE w/o EM</th><td>5.03 / 3.51<sup>&Dagger;</sup></td><td>0.128</td><td>100</td><td>10.27 / 5.84<sup>&Dagger;</sup></td><td>0.063</td><td>100</td><td>0.45 / 0.09<sup>&Dagger;</sup></td><td>0.096</td><td>100</td></tr>
-    <tr class="ours"><th>CERPE</th><td>8.66 / 5.06<sup>&Dagger;</sup></td><td>0.089</td><td>100</td><td>8.26 / 2.94<sup>&Dagger;</sup></td><td>0.063</td><td>100</td><td>0.54 / 0.11<sup>&Dagger;</sup></td><td>0.086</td><td>100</td></tr>
-   </tbody>
-  </table>
- </div>
- <p class="hint">Swipe sideways to see all columns.</p>
- <p class="note"><sup>&Dagger;</sup> Translation with ground-truth scale. CERPE rows report predicted-scale / GT-scale translation. Errors are reported over successful pairs.</p>
-
  <div class="pair">
  <div class="cell">
  <p class="label">Qualitative results</p>
@@ -112,6 +90,29 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
  </div>
  </div>
+
+ <p class="label table-label">Quantitative results</p>
+ <div class="table-wrap" tabindex="0" aria-label="Scrollable quantitative results table">
+  <table>
+   <thead>
+    <tr><th rowspan="2">Method</th><th colspan="3">CAD simulation</th><th colspan="3">Real-world CAD</th><th colspan="3">Physical robots</th></tr>
+    <tr>
+     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
+     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
+     <th>Pos. m &darr;</th><th>Rot. rad &darr;</th><th>Succ. % &uarr;</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr><th>SuperGlue</th><td>16.00<sup>&Dagger;</sup></td><td>0.895</td><td>77.5</td><td>7.62<sup>&Dagger;</sup></td><td>0.169</td><td>93.7</td><td>0.12<sup>&Dagger;</sup></td><td>0.165</td><td>98.4</td></tr>
+    <tr><th>NOPE</th><td>9.41</td><td>0.776</td><td>33.4</td><td>39.41</td><td>1.682</td><td>45.0</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><th>Co-VisNet</th><td>16.22</td><td>0.906</td><td>100</td><td>29.95</td><td>0.271</td><td>100</td><td>0.88</td><td>0.257</td><td>100</td></tr>
+    <tr class="muted"><th>CERPE w/o EM</th><td>5.03 / 3.51<sup>&Dagger;</sup></td><td>0.128</td><td>100</td><td>10.27 / 5.84<sup>&Dagger;</sup></td><td>0.063</td><td>100</td><td>0.45 / 0.09<sup>&Dagger;</sup></td><td>0.096</td><td>100</td></tr>
+    <tr class="ours"><th>CERPE</th><td>8.66 / 5.06<sup>&Dagger;</sup></td><td>0.089</td><td>100</td><td>8.26 / 2.94<sup>&Dagger;</sup></td><td>0.063</td><td>100</td><td>0.54 / 0.11<sup>&Dagger;</sup></td><td>0.086</td><td>100</td></tr>
+   </tbody>
+  </table>
+ </div>
+ <p class="hint">Swipe sideways to see all columns.</p>
+ <p class="note"><sup>&Dagger;</sup> Translation with ground-truth scale. CERPE rows report predicted-scale / GT-scale translation. Errors are reported over successful pairs.</p>
 </section>
 
 <section id="deployment">
