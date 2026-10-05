@@ -8,6 +8,9 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 img{display:block;max-width:100%;height:auto}
 .wrap{max-width:960px;margin:0 auto;padding:56px 24px 40px}
 .text{max-width:760px}
+/* every block in a section shares the 760px reading column, so figures, tables and text line up */
+main section>*{max-width:760px}
+main section>.table-wrap{max-width:100%;width:fit-content} /* wide tables may use the full width instead of scrolling */
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* header */
