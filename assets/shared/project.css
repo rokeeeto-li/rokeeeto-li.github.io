@@ -6,7 +6,7 @@ html{scroll-behavior:smooth;scroll-padding-top:20px}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Open Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 img{display:block;max-width:100%;height:auto}
-.wrap{max-width:960px;margin:0 auto;padding:56px 24px 40px}
+.wrap{max-width:888px;margin:0 auto;padding:56px 24px 40px}
 .text{max-width:840px}
 /* every block in a section shares the 840px reading column, so figures, tables and text line up */
 main section>*{max-width:840px}
