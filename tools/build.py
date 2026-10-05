@@ -52,6 +52,7 @@ def entry(p):
     return (f'<li class="pub"><div class="thumb">{thumb(p)}</div><div class="pbody">'
             f'<div class="ptitle">{esc(p["title"])}</div><div class="authors">{authors(p["authors"])}</div>'
             f'<div class="venue">{ven}.{aw}{note}</div>'
+            + (f'<div class="tldr"><b>TL;DR</b> {esc(p["tldr"])}</div>' if p.get('tldr') else '') +
             f'<div class="links">{"".join(links)}</div></div></li>')
 
 def group(keyfn, order, label=lambda k: k):

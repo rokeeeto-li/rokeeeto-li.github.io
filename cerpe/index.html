@@ -51,7 +51,7 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  <div class="text">
   <p>Relative pose estimation is fundamental to collaborative perception and coordination, yet robots often meet only briefly, communicate over limited bandwidth, and lose visual overlap through occlusion or restricted fields of view. Existing approaches commonly rely on global references, sustained overlap, or expensive visual transmission.</p>
   <p>CERPE is a system-level framework that coordinates existing large-scale pre-trained vision models for metric ego-motion and inter-robot relative pose estimation. Robots continuously exchange fixed-size descriptors and local poses; descriptor similarity gates event-triggered raw-image requests. Direct estimates anchor the relative geometry when views overlap, while metrically scaled ego-motion propagates the latest anchor through non-overlapping intervals.</p>
-  <p class="tldr"><strong>In one line:</strong> screen overlap cheaply, request pixels selectively, and preserve pose continuity when the shared view disappears.</p>
+  <p class="tldr"><strong>TL;DR:</strong> Screen overlap cheaply, request images selectively, and keep relative pose continuous when the shared view disappears.</p>
  </div>
 </section>
 
