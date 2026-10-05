@@ -10,11 +10,11 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared/project.css?v=202610051800">
+<link rel="stylesheet" href="../assets/shared/project.css?v=202610051900">
 <script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}
 if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
 if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
-<script src="../assets/shared/project.js?v=202610051800" defer></script>
+<script src="../assets/shared/project.js?v=202610051900" defer></script>
 </head><body>
 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -34,7 +34,7 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
   <span><a href="https://research.csc.ncsu.edu/corob/team.html">Peng Gao</a><sup>1</sup></span>
  </p>
  <p class="affil"><span><sup>1</sup> North Carolina State University</span><span><sup>2</sup> Princeton University</span></p>
- <p class="links"><a href="https://drive.google.com/drive/folders/1QAKyKIDpg341510mh3rUSAgRdEUgEKBa">Paper</a><a href="#demo">Video</a><a href="#citation">BibTeX</a></p>
+ <p class="links"><a href="https://drive.google.com/drive/folders/1QAKyKIDpg341510mh3rUSAgRdEUgEKBa">Paper</a><a href="#demo">Video</a><!-- <a href="#citation">BibTeX</a> --></p>
 </header>
 
 <main>
@@ -153,15 +153,24 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
  <p class="note">The evaluator is trained only on labels from a simulated reconstruction of the scene. Visual servoing corrects errors during execution.</p>
  </div>
- <details class="more">
-  <summary>How the demo is set up: from the reconstructed scene to the real robot</summary>
+ <div class="split demo">
   <figure>
-  <img src="../assets/skeleton-base-placement/fig6_real2sim2real.jpg" width="1482" height="1114" loading="lazy" alt="Real-world navigation, simulation navigation, simulation trajectory, and real-world execution">
-  <figcaption>Top: real-world localization and navigation (left) and the corresponding navigation in the reconstructed scene (right). Bottom: simulated (left) and physical (right) execution of the second banana's transfer. Orange is the placement trajectory and cyan the post-placement retreat.</figcaption>
- </figure>
- </details>
+   <img src="../assets/skeleton-base-placement/fig6_real2sim2real.jpg" width="1482" height="1114" loading="lazy" alt="(a) real-world navigation, (b) simulation navigation, (c) simulation trajectory, (d) real-world execution">
+   <figcaption>Orange: placement trajectory. Cyan: post-placement retreat.</figcaption>
+  </figure>
+  <div>
+   <p class="label">How the demo works</p>
+   <ol class="flow">
+    <li>The room is reconstructed in simulation from real captures. Candidate outcomes collected there are the labels for training the evaluator.</li>
+    <li>SC-BPE ranks skeleton&ndash;base pairs, and the selected manipulation base becomes the navigation goal.</li>
+    <li>On the robot, point-cloud registration (small_gicp) localizes it as it approaches the base (a). The same approach is replayed in simulation (b), and the refined plan gives the manipulation trajectory (c).</li>
+    <li>The robot follows the simulated action sequence. Once the target is detected, visual servoing corrects accumulated and sim-to-real errors during execution (d).</li>
+   </ol>
+  </div>
+ </div>
 </section>
 
+<!-- BibTeX hidden until the paper is public. Restore by removing this comment and the one on the header BibTeX link.
 <section id="citation">
  <h2>Citation</h2>
  <p class="text lead">Please cite the paper when using SC-BPE or its evaluation results. The BibTeX will be updated when the paper is published.</p>
@@ -177,6 +186,8 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  <span class="copy-status" role="status" aria-live="polite"></span>
  <p class="text">Contact: <a href="mailto:qli39@ncsu.edu">qli39@ncsu.edu</a>, <a href="mailto:pgao5@ncsu.edu">pgao5@ncsu.edu</a></p>
 </section>
+-->
+ <p class="text contact" style="margin-top:44px">Contact: <a href="mailto:qli39@ncsu.edu">qli39@ncsu.edu</a>, <a href="mailto:pgao5@ncsu.edu">pgao5@ncsu.edu</a></p>
 </main>
 
 <footer>&copy; 2026 Qihang Li, Yixuan Huang, Tom Silver, and Peng Gao. &middot; <a href="https://qihangli.com/">qihangli.com</a></footer>
