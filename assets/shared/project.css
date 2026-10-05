@@ -149,8 +149,8 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 /* .xscroll: a wide figure that scrolls sideways on phones instead of shrinking to unreadable size. */
 @media (max-width:720px){.xscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.xscroll img{width:680px;max-width:none}.xscroll figcaption{position:sticky;left:0;width:calc(100vw - 32px)}}
 /* Definition list for short method/baseline descriptions; .finding = one-sentence answer under a question label; .toggle = small pill button. */
-.defs{margin:0;font-size:.92rem}
-.defs dt{margin-top:.8em;font-weight:600}
+.defs{margin:0;font-size:.92rem;line-height:1.5}
+.defs dt{margin-top:.65em;font-weight:600}
 .defs dt:first-child{margin-top:0}
 .defs dd{margin:.1em 0 0;color:var(--muted)}
 .finding{margin:.2em 0 0}
@@ -158,3 +158,11 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 .toggle{font:inherit;font-size:.85rem;color:var(--link);background:none;border:1px solid var(--rule);border-radius:999px;padding:2px 12px;cursor:pointer}
 .toggle:hover{background:var(--soft)}
 table.hide-x .x{display:none}
+/* .split: text on the left, a figure on the right (stacks on phones). .more: collapsible extra figure. */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:8px 28px;align-items:center;margin-top:8px}
+.split figure{margin:0}
+.more{margin-top:22px}
+.more summary{cursor:pointer;color:var(--link);font-size:.97rem;line-height:1.6}
+.more summary:hover{text-decoration:underline}
+.more[open] summary{margin-bottom:10px}
+@media (max-width:720px){.split{display:block}.split figure{margin-top:12px}}

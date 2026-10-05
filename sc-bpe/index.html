@@ -10,11 +10,11 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared/project.css?v=202610051400">
+<link rel="stylesheet" href="../assets/shared/project.css?v=202610051500">
 <script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}
 if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
 if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
-<script src="../assets/shared/project.js?v=202610051400" defer></script>
+<script src="../assets/shared/project.js?v=202610051500" defer></script>
 </head><body>
 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -101,11 +101,15 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
 
  <p class="label table-label">1. Does ranking make planning faster?</p>
- <p class="text finding">Yes. SC-BPE has higher success and lower planning time than random ordering of the same candidates in all eight settings. On Task 2&ndash;O3 it solves all 29 scenes (random: 28.3%), and its first attempt already succeeds in 86.2% of scenes (random: 2.1%).</p>
- <figure class="side">
-  <img src="../assets/skeleton-base-placement/fig5_efficiency.png" width="1041" height="595" loading="lazy" alt="Cumulative scene success versus planning attempts and planning time on Task 2-O3">
-  <figcaption>Task 2&ndash;O3: cumulative success versus (a) candidate attempts and (b) planning time, on 29 test scenes (60 s per candidate, 180 s per scene).</figcaption>
- </figure>
+ <div class="split">
+  <div>
+   <p class="text finding">Yes. SC-BPE has higher success and lower planning time than random ordering of the same candidates in all eight settings. On Task 2&ndash;O3 it solves all 29 scenes (random: 28.3%), and its first attempt already succeeds in 86.2% of scenes (random: 2.1%).</p>
+   <p class="note">Task 2&ndash;O3: cumulative success versus (a) candidate attempts and (b) planning time, on 29 test scenes (60 s per candidate, 180 s per scene).</p>
+  </div>
+  <figure>
+   <img src="../assets/skeleton-base-placement/fig5_efficiency.png" width="1041" height="595" loading="lazy" alt="Cumulative scene success versus planning attempts and planning time on Task 2-O3">
+  </figure>
+ </div>
 
  <p class="label table-label">2. Do the scores reflect the plan?</p>
  <p class="text finding">Yes. The three skeletons below differ only in the temporary buffer, yet get different score maps. Successful base positions sit toward the left for B1, the right for B3, and a broader central region for B2, and the high-score regions follow.</p>
@@ -149,11 +153,13 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
  </div>
  <p class="note">The evaluator is trained only on labels from a simulated reconstruction of the scene. Visual servoing corrects errors during execution.</p>
  </div>
- <p class="label table-label">From reconstruction to the real robot</p>
- <figure>
+ <details class="more">
+  <summary>How the demo is set up: from the reconstructed scene to the real robot</summary>
+  <figure>
   <img src="../assets/skeleton-base-placement/fig6_real2sim2real.jpg" width="1482" height="1114" loading="lazy" alt="Real-world navigation, simulation navigation, simulation trajectory, and real-world execution">
   <figcaption>Top: real-world localization and navigation (left) and the corresponding navigation in the reconstructed scene (right). Bottom: simulated (left) and physical (right) execution of the second banana's transfer. Orange is the placement trajectory and cyan the post-placement retreat.</figcaption>
  </figure>
+ </details>
 </section>
 
 <section id="citation">
