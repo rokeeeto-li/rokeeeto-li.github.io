@@ -145,3 +145,46 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
+
+/* Section navigation: lists each section's <h2>, highlights the one being read, and can be collapsed. */
+(function () {
+  var secs = Array.prototype.filter.call(document.querySelectorAll('main section[id]'), function (s) { return s.querySelector('h2'); });
+  if (secs.length < 2) return;
+  var wide = function () { return window.innerWidth >= 1300; };
+  var nav = document.createElement('nav');
+  nav.className = 'toc'; nav.id = 'toc'; nav.setAttribute('aria-label', 'Sections');
+  var html = '<p class="toc-title">Contents</p><ol>';
+  secs.forEach(function (s) { html += '<li><a href="#' + s.id + '">' + s.querySelector('h2').textContent + '</a></li>'; });
+  nav.innerHTML = html + '</ol>';
+  var btn = document.createElement('button');
+  btn.className = 'toc-btn'; btn.type = 'button'; btn.setAttribute('aria-controls', 'toc'); btn.title = 'Contents';
+  btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>';
+  document.body.appendChild(nav); document.body.appendChild(btn);
+
+  function set(open, save) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Hide contents' : 'Show contents');
+    if (save && wide()) { try { localStorage.setItem('toc', open ? 'open' : 'closed'); } catch (e) {} }
+  }
+  var stored = null; try { stored = localStorage.getItem('toc'); } catch (e) {}
+  set(wide() && stored !== 'closed', false);
+  btn.addEventListener('click', function () { set(!nav.classList.contains('open'), true); });
+  // On narrow screens the panel floats over the page: close it after choosing a section, on Escape, or on an outside tap.
+  nav.addEventListener('click', function (e) { if (e.target.closest('a') && !wide()) set(false, false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !wide() && nav.classList.contains('open')) set(false, false); });
+  document.addEventListener('click', function (e) { if (!wide() && nav.classList.contains('open') && !e.target.closest('.toc,.toc-btn')) set(false, false); });
+  window.addEventListener('resize', function () { if (!wide() && nav.classList.contains('open') && !btn.dataset.userOpened) set(false, false); });
+  btn.addEventListener('click', function () { btn.dataset.userOpened = '1'; });
+
+  var links = nav.querySelectorAll('a'), ticking = false;
+  function spy() {
+    ticking = false;
+    var cur = -1;
+    secs.forEach(function (s, i) { if (s.getBoundingClientRect().top <= 140) cur = i; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = secs.length - 1;
+    links.forEach(function (a, i) { a.classList.toggle('is-active', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+  spy();
+})();

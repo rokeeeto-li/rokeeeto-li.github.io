@@ -7,9 +7,9 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Open Sans",-a
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 img{display:block;max-width:100%;height:auto}
 .wrap{max-width:960px;margin:0 auto;padding:56px 24px 40px}
-.text{max-width:760px}
-/* every block in a section shares the 760px reading column, so figures, tables and text line up */
-main section>*{max-width:760px}
+.text{max-width:840px}
+/* every block in a section shares the 840px reading column, so figures, tables and text line up */
+main section>*{max-width:840px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* header */
@@ -184,3 +184,19 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 .flow li{margin-top:.55em}
 .flow li:first-child{margin-top:0}
 @media (max-width:720px){.split.demo{display:block}.split.demo>div{margin-top:14px}}
+
+/* Section navigation (built by project.js from each <section><h2>). Wide screens: sits in the left margin, open by default.
+   Narrower screens: a button opens it as a small floating panel. */
+.toc-btn{position:fixed;top:16px;left:16px;z-index:41;width:38px;height:38px;padding:0;border-radius:50%;border:1px solid var(--rule);background:var(--bg);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.toc-btn:hover{border-color:var(--muted)}
+.toc-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.toc{position:fixed;top:68px;left:16px;z-index:40;width:150px;display:none;font-size:.88rem;line-height:1.4}
+.toc.open{display:block}
+.toc-title{margin:0 0 8px;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+.toc a{display:block;padding:5px 0 5px 12px;margin-left:-1px;border-left:2px solid transparent;color:var(--muted)}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.is-active{color:var(--fg);font-weight:600;border-left-color:var(--accent)}
+@media(max-width:1299px){.toc{width:210px;padding:14px 16px 10px;background:var(--bg);border:1px solid var(--rule);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.14)}}
+@media(max-width:720px){.toc-btn{top:auto;bottom:16px;left:14px;width:40px;height:40px;box-shadow:0 2px 10px rgba(0,0,0,.12)}.toc{top:auto;bottom:66px;left:14px}}
+@media print{.toc,.toc-btn{display:none!important}}
