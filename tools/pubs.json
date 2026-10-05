@@ -172,6 +172,7 @@
   "selected": 1,
   "pubtype": "preprint",
   "authors": "Qihang Li, Yixuan Huang, Tom Silver, Peng Gao",
+  "website": "https://qihangli.com/sc-bpe/",
   "paperurl": "https://drive.google.com/drive/folders/1QAKyKIDpg341510mh3rUSAgRdEUgEKBa",
   "slug": "skeleton-base-placement",
   "topic": "Robot Planning & Learning"

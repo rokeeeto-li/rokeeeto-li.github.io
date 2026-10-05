@@ -64,6 +64,10 @@ thead th:first-child{text-align:left;position:sticky;left:0;background:var(--bg)
 tbody tr+tr th,tbody tr+tr td{border-top:1px solid var(--rule)}
 tr.muted td,tr.muted th{color:var(--muted)}
 tr.ours td,tr.ours th{font-weight:700}
+table.grouped tbody td:nth-child(3n+2),table.grouped thead tr:first-child th+th{border-left:1px solid var(--rule)}
+table.grouped thead tr:nth-child(2) th:nth-child(3n+1){border-left:1px solid var(--rule)}
+td b{font-weight:700}
+td u{text-decoration-thickness:1px;text-underline-offset:2px}
 tr.ours td{color:var(--accent)}
 .hint{display:none}
 .note{margin:.5em 0 0;font-size:.85rem;color:var(--muted)}
@@ -139,6 +143,8 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 @media(max-width:720px){
  .panel.plain{padding:0;border:0}
  .panel{padding:10px 10px 12px}
- .panel .seg{gap:2px}
- .panel .seg button{padding:2px 9px;font-size:.92rem}
+ .panel .seg{gap:0}
+ .panel .seg button{padding:2px 8px;font-size:.9rem}
 }
+/* .xscroll: a wide figure that scrolls sideways on phones instead of shrinking to unreadable size. */
+@media (max-width:720px){.xscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.xscroll img{width:680px;max-width:none}.xscroll figcaption{position:sticky;left:0;width:calc(100vw - 32px)}}
