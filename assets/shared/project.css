@@ -172,7 +172,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;pad
 .tip.on{opacity:1;visibility:visible}
 .tip strong{display:block;margin-bottom:2px}
 .tip .set{display:block;margin-top:6px;color:var(--muted)}
-.split.demo{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;margin-top:22px}
+.split.demo{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;margin-top:0}
 .split.demo .label{margin-top:0}
 .flow{margin:6px 0 0;padding-left:1.25em;font-size:.95rem}
 .flow li{margin-top:.55em}
