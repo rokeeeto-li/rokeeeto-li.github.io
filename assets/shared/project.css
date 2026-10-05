@@ -10,7 +10,6 @@ img{display:block;max-width:100%;height:auto}
 .text{max-width:760px}
 /* every block in a section shares the 760px reading column, so figures, tables and text line up */
 main section>*{max-width:760px}
-main section>.table-wrap{max-width:100%;width:fit-content} /* wide tables may use the full width instead of scrolling */
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* header */
@@ -72,6 +71,10 @@ table.grouped thead tr:nth-child(2) th:nth-child(3n+1){border-left:1px solid var
 td b{font-weight:700}
 td u{text-decoration-thickness:1px;text-underline-offset:2px}
 tr.ours td{color:var(--accent)}
+td.ours,th.ours{font-weight:700;color:var(--accent)}
+td.muted,th.muted{color:var(--muted)}
+/* tr.grp: a full-width label row that starts a group of metrics (methods as columns) */
+tr.grp th{position:static;text-align:left;font-weight:600;background:var(--soft);padding:5px 8px}
 .hint{display:none}
 .note{margin:.5em 0 0;font-size:.85rem;color:var(--muted)}
 .seg{margin:26px 0 0;font-size:.97rem}
