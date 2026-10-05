@@ -10,11 +10,11 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/shared/project.css?v=202610051500">
+<link rel="stylesheet" href="../assets/shared/project.css?v=202610051600">
 <script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}
 if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
 if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
-<script src="../assets/shared/project.js?v=202610051500" defer></script>
+<script src="../assets/shared/project.js?v=202610051600" defer></script>
 </head><body>
 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -40,15 +40,17 @@ if(t==='dark')r.setAttribute('data-theme','dark');})();</script>
 <main>
 <section id="overview">
  <h2>Overview</h2>
- <div class="text">
+ <div class="split overview">
+  <div class="text">
   <p>Mobile manipulators usually pick a base pose for the next skill and reposition for the one after. Often a single pose could support the whole task, but finding it is hard: grasps and arm motions are not yet decided, and early choices change what later skills can reach.</p>
   <p>SC-BPE is a learned evaluator that scores a base pose together with a <em>plan skeleton</em>, the ordered Pick and Place actions with their objects and regions. A task and motion planner then refines the highest-scoring pairs first, keeping the base fixed for the whole sequence.</p>
   <p class="tldr"><strong>In one line:</strong> predict whether the whole plan can work from one base pose before spending time on motion planning.</p>
  </div>
- <figure>
-  <img src="../assets/skeleton-base-placement/fig1_motivation.jpg" width="1653" height="855" alt="Swapping two objects between occupied trays: where should the robot stand to complete the whole task, and how base suitability depends on the temporary buffer">
-  <figcaption>Swapping two objects between occupied trays needs a temporary location. Which base poses work depends on that choice (the skeletons on the right differ only in the buffer), so evaluating a base means reasoning about the complete plan. Click a figure to enlarge it.</figcaption>
+  <figure>
+   <img src="../assets/skeleton-base-placement/fig1_motivation.jpg" width="1653" height="855" alt="Swapping two objects between occupied trays: where should the robot stand to complete the whole task, and how base suitability depends on the temporary buffer">
+  <figcaption>Swapping two objects between occupied trays needs a temporary location. Which base poses work depends on that choice (the two skeletons at right differ only in the buffer). Click to enlarge.</figcaption>
  </figure>
+ </div>
 </section>
 
 <section id="approach">

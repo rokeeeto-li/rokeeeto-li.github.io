@@ -166,3 +166,7 @@ table.hide-x .x{display:none}
 .more summary:hover{text-decoration:underline}
 .more[open] summary{margin-bottom:10px}
 @media (max-width:720px){.split{display:block}.split figure{margin-top:12px}}
+.split.overview{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:start;margin-top:0}
+.split.overview .text p:first-child{margin-top:0}
+.split.overview figure figcaption{margin-top:6px}
+@media (max-width:720px){.split.overview{display:block}}
