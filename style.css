@@ -45,6 +45,7 @@ ul.pubs{list-style:none;padding:0;margin:0}
 .award{color:var(--accent);font-weight:600}
 .note{color:var(--muted)}
 footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;padding-top:18px;border-top:1px solid var(--rule)}
+@media(max-width:900px) and (min-width:721px){.pub{grid-template-columns:232px 1fr;gap:20px}.thumb{width:232px;min-height:130px}}
 @media(max-width:720px){
  .wrap{padding:60px 20px 32px}
  body{font-size:15.5px}
