@@ -71,10 +71,7 @@ table.grouped thead tr:nth-child(2) th:nth-child(3n+1){border-left:1px solid var
 td b{font-weight:700}
 td u{text-decoration-thickness:1px;text-underline-offset:2px}
 tr.ours td{color:var(--accent)}
-td.ours,th.ours{font-weight:700;color:var(--accent)}
-td.muted,th.muted{color:var(--muted)}
-/* tr.grp: a full-width label row that starts a group of metrics (methods as columns) */
-tr.grp th{position:static;text-align:left;font-weight:600;background:var(--soft);padding:5px 8px}
+table.compact th,table.compact td{padding:4px 6px}
 .hint{display:none}
 .note{margin:.5em 0 0;font-size:.85rem;color:var(--muted)}
 .seg{margin:26px 0 0;font-size:.97rem}
