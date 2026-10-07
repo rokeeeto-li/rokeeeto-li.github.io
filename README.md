@@ -11,6 +11,7 @@ assets/<slug>/thumb.*, full.*            per-paper thumbnail (and optional click
 assets/<slug>/...                        figures and files used by that project's page
 assets/shared/project.css, project.js    style and script shared by all project pages
 <slug>/index.html                        project page, served at qihangli.com/<slug>/ (e.g. cerpe/)
+ad-hoc-survey/                           unlisted reading map, served at qihangli.com/ad-hoc-survey/ (self-contained: index.html, data/, assets/img/; noindex, not linked from the homepage)
 cerpe.github.io/index.html, 404.html     redirect from the old /cerpe.github.io/ address to /cerpe/
 CNAME, .nojekyll                         GitHub Pages custom domain / no Jekyll build
 tools/pubs.json                          publication list (add "hidden": true to hide an entry)
