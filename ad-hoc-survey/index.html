@@ -414,6 +414,29 @@ body.wide .rtop { padding-right: 48px; }
 .vsw button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
 body.wide .vsw { margin-right: 0; }
 .blogart { max-width: 720px; margin: 0 auto; }
+/* floating contents for the blog view (left gutter, collapsible) */
+.bbody h2, .bbody h3 { scroll-margin-top: 20px; }
+.btoc2 { position: fixed; z-index: 30; font-size: .85rem; line-height: 1.35; }
+.btoc2 button { font: inherit; }
+.btoc2 .bt-tg { display: none; width: 36px; height: 36px; padding: 0; border-radius: 50%; border: 1px solid var(--rule); background: var(--bg); color: var(--muted); cursor: pointer; align-items: center; justify-content: center; }
+.btoc2 .bt-tg:hover { color: var(--fg); border-color: var(--muted); background: var(--ph); }
+.btoc2 .bt-tg svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.btoc2:not(.open) .bt-tg, .btoc2:not(.wide) .bt-tg { display: inline-flex; }
+.btoc2 .bt-p { display: none; width: 220px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; max-height: calc(100vh - var(--bt-top, 24px) - 24px); }
+.btoc2.open .bt-p { display: block; }
+.btoc2 .bt-h { display: flex; align-items: center; justify-content: space-between; margin: 0 0 6px; color: var(--muted); font-size: .78rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.btoc2 .bt-x { width: 24px; height: 24px; padding: 0 0 2px; border: 0; border-radius: 50%; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.btoc2 .bt-x:hover { color: var(--fg); background: var(--ph); }
+.btoc2 .bt-l { border-left: 1px solid var(--rule); }
+.btoc2 a { display: block; color: var(--muted); text-decoration: none; padding: 3px 8px 3px 11px; margin-left: -1px; border-left: 2px solid transparent; }
+.btoc2 a:hover { color: var(--fg); }
+.btoc2 a.cur { color: var(--fg); border-left-color: var(--fg); font-weight: 600; }
+.btoc2 a.b3 { padding-left: 22px; font-size: .82rem; }
+.btoc2 .bt-sub { display: none; }
+.btoc2 .bt-g.on .bt-sub { display: block; }
+.btoc2:not(.wide) .bt-x { display: none; }
+.btoc2:not(.wide) .bt-p { position: absolute; left: 0; bottom: 46px; width: min(300px, calc(100vw - 32px)); max-height: calc(100vh - 110px); padding: 12px 12px 8px 14px; background: var(--bg); border: 1px solid var(--rule); border-radius: 12px; box-shadow: 0 6px 24px rgba(0,0,0,.16); }
+@media print { .btoc2 { display: none; } }
 .btitle { font-size: 2rem; line-height: 1.22; letter-spacing: -.01em; font-weight: 700; margin: 8px 0 8px; }
 .bby { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
 .btoc { display: flex; flex-direction: column; gap: 2px; padding: 10px 0 14px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 8px; font-size: .94rem; }
@@ -1113,7 +1136,44 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
   }
 
   /* ---------- tree blog ---------- */
-  const BLC = {}, BLW = {};
+  const BLC = {}, BLW = {}; let tocOff = null;
+  function mountBlogToc(art) {
+    const hs = [...art.querySelectorAll('.bbody h2, .bbody h3')]; if (hs.length < 3) return null;
+    hs.forEach((h, i) => { if (!h.id) h.id = 'bt' + i; });
+    const groups = []; hs.forEach((h, i) => { if (h.tagName === 'H2' || !groups.length) groups.push({ h2: h.tagName === 'H2' ? i : -1, subs: [] }); if (h.tagName === 'H3') groups[groups.length - 1].subs.push(i); });
+    const lk = (i, c) => '<a href="#' + hs[i].id + '" class="' + c + '" data-i="' + i + '">' + esc(hs[i].textContent) + '</a>';
+    const el = document.createElement('div'); el.className = 'btoc2';
+    el.innerHTML = '<button class="bt-tg" type="button" aria-label="Contents" title="Contents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h11M4 17h16"/></svg></button><nav class="bt-p" aria-label="Contents"><div class="bt-h"><span>Contents</span><button class="bt-x" type="button" aria-label="Collapse contents" title="Collapse">&#8249;</button></div><div class="bt-l">' + groups.map(g => '<div class="bt-g">' + (g.h2 >= 0 ? lk(g.h2, 'b2') : '') + '<div class="bt-sub">' + g.subs.map(i => lk(i, 'b3')).join('') + '</div></div>').join('') + '</div></nav>';
+    $('reader').appendChild(el);
+    const panel = el.querySelector('.bt-p'), links = [...el.querySelectorAll('a')], gEls = [...el.querySelectorAll('.bt-g')];
+    const KEY = 'bt-open', mem = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+    let wide = null, open = false, raf = 0, last = -2;
+    const layout = () => {
+      const r = art.getBoundingClientRect(), w = r.left >= 264;
+      if (w !== wide) { wide = w; open = w ? mem() !== '0' : false; }
+      el.classList.toggle('wide', wide); el.classList.toggle('open', open);
+      if (wide) { const top = Math.max(24, r.top); el.style.left = (r.left - 28 - 220) + 'px'; el.style.top = top + 'px'; el.style.bottom = 'auto'; el.style.setProperty('--bt-top', top + 'px'); }
+      else { el.style.left = '16px'; el.style.top = 'auto'; el.style.bottom = '16px'; }
+    };
+    const spy = () => {
+      raf = 0; if ($('reader').hidden) return; layout();
+      let cur = -1; for (let i = 0; i < hs.length; i++) { if (hs[i].getBoundingClientRect().top <= 140) cur = i; else break; }
+      if (cur === last) return; last = cur;
+      links.forEach(a => a.classList.toggle('cur', +a.dataset.i === cur));
+      gEls.forEach((g, k) => g.classList.toggle('on', cur >= 0 && (groups[k].h2 === cur || groups[k].subs.indexOf(cur) >= 0)));
+      const a = links.find(x => +x.dataset.i === cur);
+      if (a && open) { const t = a.offsetTop, h = a.offsetHeight; if (t < panel.scrollTop + 30) panel.scrollTop = Math.max(0, t - 30); else if (t + h > panel.scrollTop + panel.clientHeight - 10) panel.scrollTop = t + h - panel.clientHeight + 10; }
+    };
+    const sched = () => { if (!raf) raf = requestAnimationFrame(spy); };
+    const setOpen = v => { open = v; if (wide) { try { localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) {} } last = -2; layout(); sched(); };
+    el.querySelector('.bt-tg').onclick = () => setOpen(!open);
+    el.querySelector('.bt-x').onclick = () => setOpen(false);
+    links.forEach(a => a.onclick = e => { e.preventDefault(); hs[+a.dataset.i].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); if (!wide) setOpen(false); });
+    const away = e => { if (!wide && open && !el.contains(e.target)) setOpen(false); }, esc2 = e => { if (e.key === 'Escape' && !wide && open) setOpen(false); };
+    window.addEventListener('scroll', sched, { passive: true }); window.addEventListener('resize', sched); document.addEventListener('pointerdown', away); document.addEventListener('keydown', esc2);
+    layout(); spy();
+    return () => { window.removeEventListener('scroll', sched); window.removeEventListener('resize', sched); document.removeEventListener('pointerdown', away); document.removeEventListener('keydown', esc2); if (raf) cancelAnimationFrame(raf); el.remove(); };
+  }
   window.__BLOG = function (id, h) { BLC[id] = h; (BLW[id] || []).forEach(f => f(h)); delete BLW[id]; };
   function loadBlog(id) {
     return new Promise((res, rej) => {
@@ -1132,6 +1192,7 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
     renderReader(); window.scrollTo(0, 0);
   }
   function applyView() {
+    if (tocOff) { tocOff(); tocOff = null; }
     const T = R.tree, on = !!(T && R.blog), sw = $('vSw');
     const fb = $('fromBlog'); fb.hidden = !(R.from && !T); sw.hidden = !T; sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', (b.dataset.v === 'blog') === on));
     ['rTitle', 'rMeta', 'rTags', 'rail'].forEach(id => $(id).hidden = on); document.querySelector('#reader .pgnav').hidden = on;
@@ -1143,6 +1204,7 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
       body.querySelectorAll('.plk').forEach(b => b.onclick = () => jumpPaper(+b.dataset.pl));
       body.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { const hh = body.querySelectorAll('.bbody h2')[+b.dataset.go]; if (hh) hh.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
       window.scrollTo(0, BY[T.id] || 0);
+      if (tocOff) tocOff(); tocOff = mountBlogToc(body.querySelector('.blogart'));
     }, () => { body.innerHTML = '<p class="bload">The post could not be loaded.</p>'; });
   }
   $('fromBlog').onclick = () => { const T = R.from; R = { cat: R.cat, idx: R.idx, page: 0, tree: T, blog: true }; dir = 1; renderReader(); };
@@ -1173,7 +1235,7 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
     renderReader();
   }
   $('prevBtn').onclick = () => step(-1); $('nextBtn').onclick = () => step(1);
-  function showOverview() { document.body.classList.remove('wide'); $('reader').hidden = true; $('overview').hidden = false; window.scrollTo(0, 0); }
+  function showOverview() { if (tocOff) { tocOff(); tocOff = null; } document.body.classList.remove('wide'); $('reader').hidden = true; $('overview').hidden = false; window.scrollTo(0, 0); }
   $('backBtn').onclick = showOverview;
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && $('reader').hidden && lb.hidden && anyActive()) { peel(); return; }
