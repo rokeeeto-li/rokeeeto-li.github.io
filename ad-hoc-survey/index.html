@@ -1204,7 +1204,7 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
       body.querySelectorAll('.plk').forEach(b => b.onclick = () => jumpPaper(+b.dataset.pl));
       body.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { const hh = body.querySelectorAll('.bbody h2')[+b.dataset.go]; if (hh) hh.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
       window.scrollTo(0, BY[T.id] || 0);
-      if (tocOff) tocOff(); tocOff = mountBlogToc(body.querySelector('.blogart'));
+      if (tocOff) tocOff(); tocOff = mountBlogToc(body.querySelector('.blogart')); if (tocOff) body.querySelectorAll('.btoc').forEach(n => n.remove());
     }, () => { body.innerHTML = '<p class="bload">The post could not be loaded.</p>'; });
   }
   $('fromBlog').onclick = () => { const T = R.from; R = { cat: R.cat, idx: R.idx, page: 0, tree: T, blog: true }; dir = 1; renderReader(); };
