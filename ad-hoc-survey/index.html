@@ -254,7 +254,8 @@ details.notes p { margin-top: 8px; color: var(--fg); text-wrap: pretty; }
 .pager button[aria-current="true"] { background: var(--fg); background-clip: content-box; }
 .ppr { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; padding-right: 30px; }
 .ppr .ptitle { font-size: 1.08rem; margin: 0; }
-.ptl { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .88rem; }
+.ptl { display: grid; grid-template-columns: auto 1fr; column-gap: 7px; row-gap: 1px; align-items: center; color: var(--muted); font-size: .82rem; line-height: 1.35; }
+.ptl .mt { grid-column: 2; }
 .xb { position: absolute; top: 14px; right: 0; width: 28px; height: 28px; border-radius: 50%; border: 0; background: none; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; }
 .xb:hover { color: var(--fg); background: var(--ph); }
 .rbtn { white-space: nowrap; border: 1px solid var(--fg); background: var(--fg); color: var(--bg); border-radius: 999px; padding: 6px 20px; font: inherit; font-size: .92rem; cursor: pointer; margin-top: 4px; }
@@ -287,6 +288,26 @@ details.notes p { margin-top: 8px; color: var(--fg); text-wrap: pretty; }
 .steps .tab:hover { color: var(--fg); }
 .steps .tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); font-weight: 600; }
 .pathbox code { cursor: pointer; }
+/* work-tree panel: right column ends flush with the slide card */
+.ptl b { font-weight: 600; color: var(--fg); font-size: .88rem; }
+.ptl [title] { cursor: help; text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--rule); }
+.ppr .tldr { margin: 0; font-size: .86rem; line-height: 1.5; }
+.rc.more { border-style: solid; border-color: var(--rule); color: var(--muted); font-size: .8rem; padding: 1px 9px; }
+.rc.more:hover { color: var(--fg); border-color: var(--fg); }
+.tmem .gnote { margin: 2px 0 0; font-size: .76rem; }
+.pp.tp .tmem { position: relative; }
+@media (min-width: 801px) {
+  .pp.tp { grid-template-columns: minmax(0, min(600px, 62%)) minmax(0, 1fr); gap: 12px 32px; }
+  .pp.tp .ppl { display: contents; }
+  .pp.tp .card.prev { grid-column: 1; grid-row: 1; }
+  .pp.tp .tpg { grid-column: 1; grid-row: 2; margin-top: 0; }
+  .pp.tp .ppr { grid-column: 2; grid-row: 1; align-self: stretch; contain: size; min-height: 0; gap: 8px; }
+  .pp.tp .ppr .ptitle { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; line-height: 1.3; }
+  .pp.tp .ppr .tldr { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+  .pp.tp .tmem { flex: 1 1 0; min-height: 28px; width: 100%; overflow: hidden; align-content: flex-start; }
+  .pp.tp .tmem.open { overflow-y: auto; scrollbar-width: thin; }
+  .pp.tp .acts { margin-top: 0; }
+}
 @media (max-width: 800px) {
   .pp { grid-template-columns: minmax(0, 1fr); }
   .ppr { padding-right: 0; }
@@ -359,6 +380,7 @@ body.wide .rtop { padding-right: 48px; }
 
 /* tags and grouped tree chips */
 .trow { flex-direction: column; gap: 6px; }
+#trow { margin-bottom: 18px; }
 .tlg { display: flex; gap: 6px 8px; align-items: baseline; flex-wrap: nowrap; }
 .tlane { flex: 0 0 auto; min-width: 208px; white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; font-size: .78rem; color: var(--muted); line-height: 1.3; }
 .tch { display: flex; gap: 6px 5px; flex-wrap: wrap; flex: 1 1 0; min-width: 0; }
@@ -909,9 +931,9 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
   /* ---------- tree card in the panel ---------- */
   function treeHTML(t) {
     const left = '<div class="ppl"><div class="card prev" data-tprev="' + t.id + '" role="button" tabindex="0" aria-label="Open the slides for ' + esc(t.name) + '"><div class="stage"></div><span class="nv l" aria-hidden="true">&#8249;</span><span class="nv r" aria-hidden="true">&#8250;</span><button class="zoom" tabindex="-1" aria-label="Enlarge">&#10530;</button></div><div class="tpg"><button class="rb" data-tp="-1" aria-label="Previous slide">&#8249;</button><span class="tpos"></span><button class="rb" data-tp="1" aria-label="Next slide">&#8250;</button></div></div>';
-    const mem = t.members.map((i, k) => { const q = papers[i]; const g = t.gs.has(i); return '<button class="rc' + (g ? ' guest' : '') + '" data-tj="' + (STEP0 + k) + '" title="' + esc(q.title) + (g ? ' (guest from ' + esc(catById[q.cat].lane) + ')' : '') + '"><b>' + esc(q.short) + '</b><small>' + q.year + '</small></button>'; }).join('') + (t.gs.size ? '<p class="gnote">Dashed chips are guests: their home is another tree (hover for the lane).</p>' : '');
-    const right = '<div class="ppr"><div class="ptl"><span class="sw" style="background:' + tcol(t) + '"></span>Work tree · ' + esc(catById[t.cat].lane) + ' · ' + nTxt(t) + ' · ' + t.y0 + '–' + t.y1 + '</div><div class="ptitle">' + esc(t.name) + '</div><div class="tldr">' + esc(t.blurb) + '</div><div class="tmem">' + mem + '</div><div class="acts"><button class="rbtn" data-act="readtree">Slides &#8594;</button><button class="rbtn" data-act="readblog">Blog &#8594;</button></div></div>';
-    return '<div class="pp">' + left + right + '<button class="xb" data-close="1" aria-label="Close" title="Close">×</button></div>';
+    const mem = t.members.map((i, k) => { const q = papers[i]; const g = t.gs.has(i); return '<button class="rc' + (g ? ' guest' : '') + '" data-tj="' + (STEP0 + k) + '" title="' + esc(q.title) + (g ? ' (guest from ' + esc(catById[q.cat].lane) + ')' : '') + '"><b>' + esc(q.short) + '</b><small>' + q.year + '</small></button>'; }).join('') + (t.gs.size ? '<p class="gnote" hidden>Dashed chips are guests; their home is another tree.</p>' : '');
+    const right = '<div class="ppr"><div class="ptl"><span class="sw" style="background:' + tcol(t) + '"></span><b>' + esc(catById[t.cat].lane) + '</b><span class="mt">' + t.members.length + ' papers' + (t.gs.size ? ' <span title="Dashed chips are guests from other trees">(' + t.gs.size + ' guest' + (t.gs.size > 1 ? 's' : '') + ')</span>' : '') + ' · ' + t.y0 + '–' + t.y1 + '</span></div><div class="ptitle" title="' + esc(t.name) + '">' + esc(t.name) + '</div><div class="tldr" title="' + esc(t.blurb) + '">' + esc(t.blurb) + '</div><div class="tmem">' + mem + '</div><div class="acts"><button class="rbtn" data-act="readtree">Slides &#8594;</button><button class="rbtn" data-act="readblog">Blog &#8594;</button></div></div>';
+    return '<div class="pp tp">' + left + right + '<button class="xb" data-close="1" aria-label="Close" title="Close">×</button></div>';
   }
   function wireTree(root, t) {
     const cd = root.querySelector('.card[data-tprev]'), pos = root.querySelector('.tpos'), chips = [...root.querySelectorAll('[data-tj]')], btn = [...root.querySelectorAll('[data-tp]')];
@@ -923,6 +945,22 @@ const LINKS = {"0":["https://ojs.aaai.org/index.php/AAAI/article/view/7529","oth
     const go = d => { TJ = Math.max(0, Math.min(t.n - 1, TJ + d)); show(); };
     const big = () => openLB({ key: t.id, n: t.n, name: t.short, j: TJ, sync: n => { TJ = n; show(); } });
     show();
+    const tm = root.querySelector('.tmem'), gn = tm.querySelector('.gnote'), mq = matchMedia('(min-width: 801px)'); let open = false;
+    const more = document.createElement('button'); more.className = 'rc more'; more.type = 'button';
+    more.onclick = () => { open = !open; fit(); };
+    const fit = () => {
+      chips.forEach(c => c.hidden = false); more.remove(); if (gn) gn.hidden = true; tm.classList.remove('open');
+      const desk = mq.matches, rowH = chips[0].offsetHeight + 6, lim = desk ? tm.clientHeight : rowH * 3 - 6;
+      if (tm.scrollHeight <= lim + 1) return;
+      tm.appendChild(more);
+      if (open) { more.textContent = 'Show fewer'; if (gn) gn.hidden = false; if (desk) tm.classList.add('open'); return; }
+      let k = chips.length;
+      const bottom = () => more.offsetTop + more.offsetHeight;
+      do { k--; chips[k].hidden = true; more.textContent = '+' + (chips.length - k); } while (k > 0 && bottom() > lim + 1);
+      more.title = chips.slice(k).map(c => c.title.replace(/ \(guest from .*\)$/, '')).join('\n');
+    };
+    fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    if (window.ResizeObserver) { const ro = new ResizeObserver(() => { if (!root.isConnected) { ro.disconnect(); return; } fit(); }); ro.observe(root.querySelector('.pp')); }
     btn.forEach(b => b.onclick = () => go(+b.dataset.tp));
     chips.forEach(c => c.onclick = () => { TJ = +c.dataset.tj; show(); });
     wireZones(cd, () => go(-1), () => go(1), big);
