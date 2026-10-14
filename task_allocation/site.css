@@ -42,14 +42,7 @@ a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid
 .bar #counter { font-variant-numeric: tabular-nums; }
 
 /* ---------- contents (left) ---------- */
-nav.toc { font-family: var(--display); font-size: .9rem; max-height: calc(100vh - 28px); overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
-/* the contents scrolls on its own, but its scrollbar stays out of sight until the pointer is over it */
-nav.toc { scrollbar-width: thin; scrollbar-color: transparent transparent; }
-nav.toc:hover { scrollbar-color: var(--line) transparent; }
-nav.toc::-webkit-scrollbar { width: 8px; }
-nav.toc::-webkit-scrollbar-track { background: transparent; }
-nav.toc::-webkit-scrollbar-thumb { background: transparent; border-radius: 4px; }
-nav.toc:hover::-webkit-scrollbar-thumb { background: var(--line); }
+nav.toc { font-family: var(--display); font-size: .9rem; max-height: calc(100vh - 28px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-right: 4px; }
 .toc .part { margin-bottom: 16px; }
 .toc .ph { font-family: var(--display); font-weight: 600; font-size: .72rem; letter-spacing: .07em; }
 .toc .pt { font-weight: 700; }
@@ -114,3 +107,23 @@ nav.toc:hover::-webkit-scrollbar-thumb { background: var(--line); }
   .notes { font-size: 16px; padding-top: 24px; }
   .notes > *, .notes .key, .notes .introbox { max-width: none; }
 }
+
+/* ---------- contents: parts fold into an accordion; the whole column can be hidden ---------- */
+.toc .part { margin: 0 0 6px; }
+.toc .part:not(.open) > :not(.ph):not(.pt) { display: none; }
+.toc .part:not(.open) .pt { margin-bottom: 8px; }
+.toc .pt[data-acc] { cursor: pointer; align-items: center; border-radius: 6px; padding: 2px 4px; margin-left: -4px; margin-right: -4px; }
+.toc .pt[data-acc]:hover { background: var(--bg); }
+.toc .pt[data-acc]::after { content: ""; flex: none; margin-left: auto; width: 6px; height: 6px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: rotate(-45deg); transition: transform .15s; }
+.toc .part.open .pt[data-acc]::after { transform: rotate(45deg); }
+.toc .part.open .pt { margin-bottom: 8px; }
+.tocbtn { display: inline-flex; align-items: center; gap: 7px; }
+.tocbtn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+body.toc-off .top, body.toc-off .wrap { max-width: 1168px; }
+body.toc-off .wrap { grid-template-columns: minmax(0, 1fr); }
+body.toc-off nav.toc { display: none; }
+@media (max-width: 1099px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); }
+  body:not(.toc-off) nav.toc { position: fixed; left: 12px; top: 142px; bottom: 12px; width: min(330px, calc(100vw - 24px)); max-height: none; padding: 16px 14px; background: var(--page); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 8px 28px rgba(0, 0, 0, .18); z-index: 40; }
+}
+@media (max-width: 860px) { .tocbtn { display: none; } }
