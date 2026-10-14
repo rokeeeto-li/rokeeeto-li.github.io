@@ -27,9 +27,9 @@ a { color: var(--cool); text-decoration: none; }
 a:hover { text-decoration: underline; }
 a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--cool); outline-offset: 2px; }
 
-.top { max-width: 1280px; padding: 30px 24px 10px; }
+.top { max-width: 1320px; padding: 30px 24px 10px; }
 .top h1 { font-family: var(--display); font-weight: 700; font-size: 1.55rem; letter-spacing: -.01em; }
-.wrap { max-width: 1280px; padding-block: 14px 64px; gap: 32px; grid-template-columns: 232px minmax(0, 1fr); }
+.wrap { max-width: 1320px; padding-block: 14px 64px; gap: 32px; grid-template-columns: clamp(232px, 22vw, 290px) minmax(0, 1fr); }
 
 /* ---------- buttons ---------- */
 .btn { font-family: var(--display); font-size: .86rem; line-height: 1.5; border: 1px solid var(--line); background: var(--page); color: var(--ink); padding: 4px 14px; border-radius: 999px; transition: border-color .15s, background .15s; }
