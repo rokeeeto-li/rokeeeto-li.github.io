@@ -78,7 +78,7 @@ nav.toc { font-family: var(--display); font-size: .9rem; max-height: calc(100vh 
 
 /* ---------- notes (below the slide) ---------- */
 .notes { background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 30px 0 8px; margin-top: 30px; font-family: var(--display); font-size: 16.5px; line-height: 1.75; }
-.notes > * { max-width: 760px; }
+.notes > * { max-width: 760px; margin-left: auto !important; margin-right: auto !important; }
 .notes h3 { font-weight: 700; font-size: 1.4rem; letter-spacing: -.01em; margin-bottom: 14px; }
 .notes p { margin-bottom: 14px; text-wrap: pretty; }
 .notes code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .86em; background: var(--bg); padding: 1px 6px; border-radius: 4px; }
