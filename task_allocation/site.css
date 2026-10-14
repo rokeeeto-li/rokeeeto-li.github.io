@@ -1,0 +1,107 @@
+/* Theme for the task-allocation deck: follows qihangli.com (Open Sans, neutral palette, hairline rules, pill buttons).
+   Loaded after the deck's own inline CSS, so it only re-skins; the deck's markup and scripts are untouched. */
+
+/* ---------- palette ---------- */
+:root {
+  --page: #ffffff; --bg: #f4f6f8; --surface: #ffffff; --ink: #1f2328; --muted: #6b7280; --line: #e5e7eb;
+  --accent: #c4521f; --accent-soft: #fbe9df; --cool: #1a56a7; --cool-soft: #e6eef9;
+  --display: "Open Sans", "Noto Sans SC", -apple-system, "Segoe UI", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --body: var(--display);
+  --mono: var(--display);
+  --serif: "Source Serif 4", "Noto Sans SC", Georgia, "Times New Roman", "PingFang SC", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #14161a; --bg: #1d2026; --surface: #181b20; --ink: #e6e8eb; --muted: #9aa3ad; --line: #2a2e35;
+    --accent: #f08a5a; --accent-soft: #3a2418; --cool: #6cb0ff; --cool-soft: #182a40;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #14161a; --bg: #1d2026; --surface: #181b20; --ink: #e6e8eb; --muted: #9aa3ad; --line: #2a2e35;
+  --accent: #f08a5a; --accent-soft: #3a2418; --cool: #6cb0ff; --cool-soft: #182a40;
+}
+
+/* ---------- page ---------- */
+body { background: var(--page); font-family: var(--body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; transition: background .2s, color .2s; }
+a { color: var(--cool); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--cool); outline-offset: 2px; }
+
+.top { max-width: 1280px; padding: 30px 24px 10px; }
+.top h1 { font-family: var(--display); font-weight: 700; font-size: 1.55rem; letter-spacing: -.01em; }
+.wrap { max-width: 1280px; padding-block: 14px 64px; gap: 32px; grid-template-columns: 232px minmax(0, 1fr); }
+
+/* ---------- buttons ---------- */
+.btn { font-family: var(--display); font-size: .86rem; line-height: 1.5; border: 1px solid var(--line); background: var(--page); color: var(--ink); padding: 4px 14px; border-radius: 999px; transition: border-color .15s, background .15s; }
+.btn:hover { border-color: var(--muted); background: var(--bg); }
+.btn.primary { background: var(--ink); color: var(--page); border-color: var(--ink); }
+.btn.primary:hover { opacity: .85; background: var(--ink); }
+.btn:disabled { opacity: .35; cursor: default; }
+.btn:disabled:hover { border-color: var(--line); background: var(--page); }
+.bar { font-family: var(--display); font-size: .88rem; margin-bottom: 12px; }
+.bar #counter { font-variant-numeric: tabular-nums; }
+
+/* ---------- contents (left) ---------- */
+nav.toc { font-family: var(--display); font-size: .9rem; max-height: calc(100vh - 28px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-right: 4px; }
+.toc .part { margin-bottom: 16px; }
+.toc .ph { font-family: var(--display); font-weight: 600; font-size: .72rem; letter-spacing: .07em; }
+.toc .pt { font-weight: 700; }
+.toc button { border-radius: 6px; }
+.toc button:hover { background: var(--bg); color: var(--ink); }
+.toc button[aria-current="true"] { background: var(--bg); color: var(--ink); font-weight: 600; box-shadow: inset 2px 0 0 var(--ink); border-radius: 0 6px 6px 0; }
+.toc .num { font-family: var(--display); font-variant-numeric: tabular-nums; font-size: .74rem; }
+.toc .meta { font-family: var(--display); font-size: .7rem; color: var(--muted); }
+.toc ol.kids { border-left-color: var(--line); }
+.toc .soon { font-family: var(--display); }
+
+/* ---------- slide ---------- */
+.slide { border-radius: 10px; border-color: var(--line); box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
+:root[data-theme="dark"] .slide { box-shadow: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .slide { box-shadow: none; } }
+.slide h2 { font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+.slide .eyebrow { font-family: var(--display); font-weight: 600; letter-spacing: .1em; }
+.slide ul { font-weight: 400; }
+.slide li b { font-weight: 700; }
+.slide li::before { border-radius: 50%; }
+.slide .pstrip, .slide .chip, .slide .foot, .slide .backlink { font-family: var(--display); }
+.slide .pstrip button { border-radius: 999px; padding: .12cqw .7cqw; }
+.slide .pstrip button.on { font-weight: 600; }
+.slide .math { border-radius: 0 6px 6px 0; }
+.slide .math .ml, .slide .math .me { font-family: var(--serif); }
+.slide .solves .txt { font-family: var(--serif); }
+.slide thead th { font-family: var(--display); letter-spacing: .05em; }
+.slide tbody th { font-weight: 700; }
+.slide .backlink { border-radius: 999px; padding: .45cqw 1.3cqw; }
+.fig text { font-family: var(--display); }
+
+/* ---------- notes (below the slide) ---------- */
+.notes { background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 30px 0 8px; margin-top: 30px; font-family: var(--display); font-size: 16.5px; line-height: 1.75; }
+.notes > * { max-width: 760px; }
+.notes h3 { font-weight: 700; font-size: 1.4rem; letter-spacing: -.01em; margin-bottom: 14px; }
+.notes p { margin-bottom: 14px; text-wrap: pretty; }
+.notes code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .86em; background: var(--bg); padding: 1px 6px; border-radius: 4px; }
+.notes .key { background: var(--bg); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; max-width: 760px; }
+.notes .key .lbl { font-family: var(--display); font-weight: 600; letter-spacing: .08em; }
+.notes .introbox { background: var(--cool-soft); border-radius: 8px; max-width: 760px; }
+.notes .introbox .lbl, .notes .introbox .meta, .notes .rvx-h .lbl, .refs h4, .refs .lk { font-family: var(--display); }
+.notes .introbox .lbl, .notes .rvx-h .lbl { font-weight: 600; letter-spacing: .08em; }
+.notes table.cmp { max-width: 840px; }
+.notes table.cmp th { font-family: var(--display); font-weight: 600; letter-spacing: .05em; }
+.notes .rvx { border-top-style: solid; }
+.refs h4 { font-weight: 600; letter-spacing: .07em; }
+.refs ol { font-size: .86em; }
+
+/* ---------- glossary popup, mobile jump menu ---------- */
+#gltip { font-family: var(--display); border-radius: 8px; border-color: var(--line); border-left-color: var(--cool); box-shadow: 0 8px 28px rgba(0, 0, 0, .16); }
+#gltip .gh, #gltip .gf { font-family: var(--display); }
+.mobile-nav select { font-family: var(--display); border-radius: 8px; border-color: var(--line); }
+.mobile-nav label { font-family: var(--display) !important; font-size: .8rem !important; }
+.exit-hint { font-family: var(--display); }
+
+@media (max-width: 860px) {
+  .top { padding: 22px 16px 6px; }
+  .top h1 { font-size: 1.3rem; }
+  .wrap { grid-template-columns: minmax(0, 1fr); }
+  .notes { font-size: 16px; padding-top: 24px; }
+  .notes > *, .notes .key, .notes .introbox { max-width: none; }
+}
