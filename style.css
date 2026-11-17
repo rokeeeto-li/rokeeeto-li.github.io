@@ -7,8 +7,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 .top{display:grid;grid-template-columns:220px 1fr;grid-template-areas:"side name" "side intro";grid-template-rows:auto 1fr;column-gap:40px;align-items:start}
 .side{grid-area:side}.name{grid-area:name}.intro{grid-area:intro}
 .avatar{width:220px;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:4px;display:block;background:var(--ph)}
-.contact{list-style:none;padding:0;margin:14px 0 0;font-size:.93rem}
-.contact li{display:flex;gap:10px;margin:.3em 0}
+.contact{list-style:none;padding:0;margin:10px 0 0;font-size:.93rem;line-height:1.45}
+.contact li{display:flex;gap:10px;margin:.1em 0}
 .contact span{flex:0 0 58px;color:var(--muted)}
 .name{font-size:2.1rem;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em;display:flex;align-items:center;gap:.3em}
 .name .logo{width:1.35em;height:1.35em;margin:-.15em 0 -.15em -.1em;flex:none}
